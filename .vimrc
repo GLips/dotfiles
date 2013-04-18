@@ -11,7 +11,8 @@ Bundle 'gmarik/vundle'
 " Sexy sexy bundles
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'tpope/vim-fugitive'
-"Bundle 'Lokaltog/vim-easymotion' " removes the <number>f{char} from f{char} by showing all possibilities
+" removes the <number>f{char} from f{char} by showing all possibilities
+Bundle 'Lokaltog/vim-easymotion'
 
 " required for Vundle
 filetype plugin indent on
@@ -50,3 +51,6 @@ colorscheme railscasts
 
 set hlsearch
 hi Search guibg=Magenta
+
+" Auto-reload after making changes to the .vimrc
+au! BufWritePost .vimrc source %
