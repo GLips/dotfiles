@@ -13,6 +13,11 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'vim-scripts/AutoClose'
 Bundle 'ervandew/supertab'
+Bundle 'xenoterracide/html.vim'
+Bundle 'tsaleh/vim-matchit'
+Bundle 'jpo/vim-railscasts-theme'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'godlygeek/tabular'
 
 filetype plugin indent on
 " }
@@ -35,6 +40,10 @@ set noswapfile
 set wildmenu
 set wildmode=list:longest
 
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
+
 " Ignore case when searching unless searching with a capital letter
 set ignorecase
 set smartcase
@@ -54,19 +63,41 @@ map <C-l> :tabnext<CR>
 map <C-h> :tabprevious<CR>
 " }
 
+let mapleader = ","
+
 " Syntax! {
 syntax on
 au BufRead,BufNewFile,BufWrite {*.less,*.sass,*.scss} set ft=css
 au BufRead,BufNewFile,BufWrite {*.coffee,*.json} set ft=javascript
+
+" Markdown files
+au BufRead,BufNewFile {*.md} set filetype=markdown
+au BufRead,BufNewFile {*.md} setlocal spell
+au BufRead,BufNewFile {*.md} setlocal textwidth=80
 " }
 
 " Use jj to exit insert mode. Nobody ever types jj.
 inoremap jj <Esc>
+" Easily get out of auto completed ()'s and such
+inoremap <C-g> <Esc>$
 
 " Why shift when you can .. not?
 nnoremap ; :
 
-colorscheme railscasts
+" Tabular mappings {
+if exists(":Tabularize")
+  nmap <Leader>a= :Tabularize /=<CR>
+  vmap <Leader>a= :Tabularize /=<CR>
+  nmap <Leader>a: :Tabularize /:\zs<CR>
+  vmap <Leader>a: :Tabularize /:\zs<CR>
+endif
+" }
+
+"if has("gui")
+"colorscheme railscasts
+let g:solarized_termcolors=256
+colorscheme solarized
+set background=dark
 
 set hlsearch
 hi Search guibg=Magenta
