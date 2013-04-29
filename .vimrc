@@ -79,7 +79,7 @@ au BufRead,BufNewFile {*.md} setlocal textwidth=80
 " Use jj to exit insert mode. Nobody ever types jj.
 inoremap jj <Esc>
 " Easily get out of auto completed ()'s and such
-inoremap <C-g> <Esc>$
+inoremap <C-g> <Esc>A
 
 " Why shift when you can .. not?
 nnoremap ; :
