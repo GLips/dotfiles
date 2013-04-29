@@ -6,7 +6,7 @@ export CP="graham@dev.customerparadigm.com:/home/graham/public_html"
 export CG="captiongenerator.com@captiongenerator.com"
 export IS="ironswin@ironswine.com"
 
-alias ll="ls -laGF"
+alias ll="ls -laGFh"
 alias defend="bundle exec guard"
 alias grep="grep --color=auto"
 alias g="git"
