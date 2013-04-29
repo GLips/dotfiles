@@ -1,0 +1,6 @@
+alias ll="ls -laGFh"
+alias defend="bundle exec guard"
+alias grep="grep --color=auto"
+alias g="git"
+alias ..="cd .."
+alias gg="cd .. && ll"

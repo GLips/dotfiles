@@ -26,3 +26,5 @@
 	mmerge = merge --no-ff
 [mergetool]
 	keepBackup = true
+[color]
+	ui = true
