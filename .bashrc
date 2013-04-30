@@ -24,9 +24,7 @@ case "$TERM" in xterm*)
 esac
 TITLE="\[\e]0;\u@\h\a\]"
 PS1="${TITLE}${CWDCOLOR}\W${PRMTCOLOR}"
-if [[ $(whoami) != "Graham" ]]; then
-	PS1="${BARCOLOR}(${USERCOLOR}\u${BARCOLOR})${NOCOLOR} ${PS1}"
-fi
+PS1="${BARCOLOR}(${USERCOLOR}\u${BARCOLOR})${NOCOLOR} ${PS1}"
 if [[ $EUID -ne 0 ]]; then
 	PS1="${PS1}>"
 else
