@@ -31,6 +31,8 @@ set laststatus=2 " Always show status bar at the bottom
 set autoindent
 set cindent
 set incsearch " Search as you type
+set noexpandtab
+set tabstop=2
 
 set nowritebackup
 set nobackup
