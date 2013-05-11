@@ -19,7 +19,7 @@ function cd()
 {
 	builtin cd "$*" && ll -t
 }
-function cdc()
+function cdd()
 {
 	builtin cd "$*" && clear && ll -t
 }
