@@ -5,12 +5,12 @@ fi
 export LASTDIR="/"
 
 function prompt_command {
-pwd > ~/.lastdir
+	pwd > ~/.lastdir
 
-# Record new directory on change.
-newdir=`pwd`
+	# Record new directory on change.
+	newdir=`pwd`
 
-export LASTDIR=$newdir
+	export LASTDIR=$newdir
 
 }
 export PROMPT_COMMAND=prompt_command
@@ -32,5 +32,8 @@ function cdto()
 	bash --login
 }
 function freq() {
-    sort $* | uniq -c | sort -rn;
+	sort $* | uniq -c | sort -rn;
+}
+function gp() {
+	grep -R $1 $2
 }
