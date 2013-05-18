@@ -17,7 +17,7 @@ export PROMPT_COMMAND=prompt_command
 
 function cd()
 {
-	builtin cd $* && ll -t
+	builtin cd "$*" && ll -t
 }
 function cl()
 {
