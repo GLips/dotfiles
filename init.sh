@@ -17,9 +17,10 @@ for i in \
 	"git"\
 	"gitconfig"\
 	"vimrc"\
-	"tmux.conf"\
+	"tmux.conf"
 do
-	if [ -e ".$i" ]; then
+	if [ -e ".$i" ]
+	then
 		echo -e "\e[1;31mMoving .$i to $backup_dir/$i\e[m"
 		mv ".$i" "$backup_dir/$i"
 	fi
@@ -38,17 +39,19 @@ touch .gitignore
 echo "README.md" >> .gitignore
 echo "init.sh" >> .gitignore
 
-# Move readme & init.sh to the backup folder
-mv README.md $backup_dir/
-mv init.sh $backup_dir/
-
 cd ..
+
+# Move readme & init.sh to the backup folder
+mv $dotfile_dir/README.md $backup_dir/
+mv $dotfile_dir/init.sh $backup_dir/
+
 
 for f in $dotfile_dir/.*
 do
-	if [ $f -ne ".git" -a $f -ne ".gitignore" ]
+	b=$(basename $f)
+	if [ $b != ".git" ] && [ $b != ".gitignore" ] && [ $b != ".." ] && [ $b != "." ]
 	then
-		ln -s $dotfile_dir/$f $f
+		ln -s $f $b
 	fi
 done
 
