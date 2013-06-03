@@ -1,4 +1,6 @@
 #!/bin/bash
+# Install script for dotfile customizations
+# Modified from https://github.com/alexdavid/dotfiles
 
 # Exit on error
 set -e
@@ -55,4 +57,4 @@ do
 	fi
 done
 
-"]]"
+source ~/.bashrc
