@@ -67,12 +67,6 @@ set cursorline
 set scrolloff=5 " Always want some context around the cursor line
 " }
 
-" Tabs {
-map <C-t> <Esc>:tabnew<CR>
-map <C-l> :tabnext<CR>
-map <C-h> :tabprevious<CR>
-" }
-
 let mapleader = ","
 
 " Syntax! {
@@ -86,16 +80,6 @@ au BufRead,BufNewFile {*.md} setlocal spell
 au BufRead,BufNewFile {*.md} setlocal textwidth=80
 " }
 
-" Use jj to exit insert mode. Nobody ever types jj.
-inoremap jj <Esc>
-" Easily get out of auto completed ()'s and such
-inoremap <C-g> <Esc>A
-
-" Why shift when you can .. not?
-nnoremap ; :
-" Change paste--switch the word with the current contents of the register
-nmap <silent> cp "_cw<C-R>"<Esc>
-
 " Tabular mappings {
 if exists(":Tabularize")
   nmap <Leader>a= :Tabularize /=<CR>
@@ -104,12 +88,6 @@ if exists(":Tabularize")
   vmap <Leader>a: :Tabularize /:\zs<CR>
 endif
 " }
-
-"if has("gui")
-"colorscheme railscasts
-let g:solarized_termcolors=256
-colorscheme solarized
-set background=dark
 
 set hlsearch
 hi Search guibg=Magenta
