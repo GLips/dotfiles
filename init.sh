@@ -19,6 +19,7 @@ for i in \
 	"git"\
 	"gitconfig"\
 	"vimrc"\
+	"vim"\
 	"tmux.conf"\
 	"vim_settings"
 do
