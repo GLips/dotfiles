@@ -93,6 +93,8 @@ inoremap <C-g> <Esc>A
 
 " Why shift when you can .. not?
 nnoremap ; :
+" Change paste--switch the word with the current contents of the register
+nmap <silent> cp "_cw<C-R>"<Esc>
 
 " Tabular mappings {
 if exists(":Tabularize")

@@ -8,10 +8,16 @@ cd
 
 # Backup existing files
 backup_dir="dotfiles_backup"
-mkdir $backup_dir
+if [ ! -e $backup_dir ]
+then
+	mkdir $backup_dir
+fi
 
 dotfile_dir="dotfiles"
-mkdir $dotfile_dir
+if [ ! -e $dotfile_dir ]
+then
+	mkdir $dotfile_dir
+fi
 
 echo -e "Looking for files that would be overwritten."
 for i in \
@@ -24,10 +30,11 @@ for i in \
 	".tmux.conf"\
 	".vim_settings"
 do
+	echo -e "$i"
 	if [ -e "$i" ]
 	then
 		echo -e "Moving $i to $backup_dir/$i"
-		mv "$i" "$backup_dir/$i"
+		mv $i "$backup_dir/$i"
 	fi
 done
 
@@ -35,11 +42,16 @@ done
 cd $dotfile_dir
 
 # Pull down repo
-git init
-git remote add origin git://github.com/GLips/dotfiles.git
-git fetch
-git branch master origin/master
-git checkout master
+if [ $(git config --get remote.origin.url) != "git://github.com/GLips/dotfiles.git" ]
+then
+	git init
+	git remote add origin git://github.com/GLips/dotfiles.git
+	git fetch
+	git branch master origin/master
+	git checkout master
+else
+	git fetch
+fi
 touch .gitignore
 echo "README.md" >> .gitignore
 echo "init.sh" >> .gitignore
@@ -47,8 +59,14 @@ echo "init.sh" >> .gitignore
 cd ..
 
 # Move readme & init.sh to the backup folder
-mv $dotfile_dir/README.md $backup_dir/
-mv $dotfile_dir/init.sh $backup_dir/
+if [ -e $dotfile_dir/README.md ]
+then
+	mv $dotfile_dir/README.md $backup_dir/
+fi
+if [ -e $dotfile_dir/README.md ]
+then
+	mv $dotfile_dir/init.sh $backup_dir/
+fi
 
 
 for f in $dotfile_dir/.*
