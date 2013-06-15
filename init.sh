@@ -8,16 +8,18 @@ cd
 
 # Backup existing files
 backup_dir="dotfiles_backup"
-if [ ! -e $backup_dir ]
+if [ -e $backup_dir ]
 then
-	mkdir $backup_dir
+	rm -rf $backup_dir
 fi
+mkdir $backup_dir
 
 dotfile_dir="dotfiles"
-if [ ! -e $dotfile_dir ]
+if [  -e $dotfile_dir ]
 then
-	mkdir $dotfile_dir
+	rm -rf $dotfile_dir
 fi
+mkdir $dotfile_dir
 
 echo -e "Looking for files that would be overwritten."
 for i in \
@@ -30,7 +32,6 @@ for i in \
 	".tmux.conf"\
 	".vim_settings"
 do
-	echo -e "$i"
 	if [ -e "$i" ]
 	then
 		echo -e "Moving $i to $backup_dir/$i"
@@ -42,7 +43,7 @@ done
 cd $dotfile_dir
 
 # Pull down repo
-if [ $(git config --get remote.origin.url) != "git://github.com/GLips/dotfiles.git" ]
+if [[ $(git config --get remote.origin.url) != "git://github.com/GLips/dotfiles.git" ]]
 then
 	git init
 	git remote add origin git://github.com/GLips/dotfiles.git
@@ -58,23 +59,12 @@ echo "init.sh" >> .gitignore
 
 cd ..
 
-# Move readme & init.sh to the backup folder
-if [ -e $dotfile_dir/README.md ]
-then
-	mv $dotfile_dir/README.md $backup_dir/
-fi
-if [ -e $dotfile_dir/README.md ]
-then
-	mv $dotfile_dir/init.sh $backup_dir/
-fi
-
-
 for f in $dotfile_dir/.*
 do
 	b=$(basename $f)
 	if [ $b != ".git" ] && [ $b != ".gitignore" ] && [ $b != ".." ] && [ $b != "." ]
 	then
-		ln -s $f $b
+		ln -fs $f $b
 	fi
 done
 
