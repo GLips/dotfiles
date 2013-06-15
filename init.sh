@@ -13,20 +13,21 @@ mkdir $backup_dir
 dotfile_dir="dotfiles"
 mkdir $dotfile_dir
 
+echo -e "Looking for files that would be overwritten."
 for i in \
-	"bash"\
-	"bashrc"\
-	"git"\
-	"gitconfig"\
-	"vimrc"\
-	"vim"\
-	"tmux.conf"\
-	"vim_settings"
+	".bash"\
+	".bashrc"\
+	".git"\
+	".gitconfig"\
+	".vimrc"\
+	".vim"\
+	".tmux.conf"\
+	".vim_settings"
 do
-	if [ -e ".$i" ]
+	if [ -e "$i" ]
 	then
-		echo -e "\e[1;31mMoving .$i to $backup_dir/$i\e[m"
-		mv ".$i" "$backup_dir/.$i"
+		echo -e "Moving $i to $backup_dir/$i"
+		mv "$i" "$backup_dir/$i"
 	fi
 done
 
