@@ -18,8 +18,15 @@ Bundle 'tsaleh/vim-matchit'
 Bundle 'jpo/vim-railscasts-theme'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'godlygeek/tabular'
+Bundle 'kien/ctrlp.vim'
 
 filetype plugin indent on
+" }
+
+" Settings files {
+for f in split(glob('~/.vim_settings/*.vim'), '\n')
+	exe 'source' f
+endfor
 " }
 
 " Settings {

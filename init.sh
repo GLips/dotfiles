@@ -19,7 +19,8 @@ for i in \
 	"git"\
 	"gitconfig"\
 	"vimrc"\
-	"tmux.conf"
+	"tmux.conf"\
+	"vim_settings"
 do
 	if [ -e ".$i" ]
 	then
