@@ -46,7 +46,7 @@ cd $dotfile_dir
 if [[ $(git config --get remote.origin.url) != "git://github.com/GLips/dotfiles.git" ]]
 then
 	git init
-	git remote add origin git://github.com/GLips/dotfiles.git
+	git remote add origin git@github.com:GLips/dotfiles.git
 	git fetch
 	git branch master origin/master
 	git checkout master
