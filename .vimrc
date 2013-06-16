@@ -1,3 +1,5 @@
+let mapleader = ","
+
 set nocompatible
 filetype off
 
@@ -67,8 +69,6 @@ set wrap
 set cursorline
 set scrolloff=5 " Always want some context around the cursor line
 " }
-
-let mapleader = ","
 
 " Syntax! {
 syntax on
