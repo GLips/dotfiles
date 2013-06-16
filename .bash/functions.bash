@@ -1,5 +1,5 @@
 if [ -f ~/.lastdir ]; then
-			cd "`cat ~/.lastdir`"
+			builtin cd "`cat ~/.lastdir`"
 fi
 
 export LASTDIR="/"
