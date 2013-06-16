@@ -9,6 +9,14 @@ map <C-l> :tabnext<CR>
 map <C-h> :tabprevious<CR>
 " }
 
+" Splits {
+" Mac style remappings of alt keys
+noremap ˙ <C-w>h
+noremap ¬ <C-w>l
+noremap ∆ <C-w>j
+noremap ˚ <C-w>k
+" }
+
 " Use jj to exit insert mode. Nobody ever types jj.
 inoremap jj <Esc>
 
