@@ -16,7 +16,7 @@ for f in ~/.bash/*; do
 done
 
 # Set PS1
-case "$TERM" in xterm*)
+case "$TERM" in xterm* | screen-256color)
 	NOCOLOR="\[\e[m\]"
 	CWDCOLOR="\[\e[36m\]"
 	PRMTCOLOR="\[\e[32m\]"
