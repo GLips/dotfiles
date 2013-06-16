@@ -22,6 +22,8 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'godlygeek/tabular'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
+Bundle 'tpope/vim-rails'
+Bundle 'aaronjensen/vim-sass-status'
 
 filetype plugin indent on
 " }
