@@ -19,6 +19,7 @@ Bundle 'jpo/vim-railscasts-theme'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'godlygeek/tabular'
 Bundle 'kien/ctrlp.vim'
+Bundle 'scrooloose/nerdtree'
 
 filetype plugin indent on
 " }
