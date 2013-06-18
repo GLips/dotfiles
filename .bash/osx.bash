@@ -15,17 +15,14 @@ if [ "$UNAME" = Darwin ]; then
 		kill ${ql_pid}) > /dev/null 2>&1
 	}
 
-# Disable press-and-hold for keys in favor of key repeat
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+	# Disable press-and-hold for keys in favor of key repeat
+	defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
-# Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 0
+	# Disable opening and closing window animations
+	defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
 
-# Disable opening and closing window animations
-defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
-
-# Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
-defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+	# Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
+	defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
 fi
 
