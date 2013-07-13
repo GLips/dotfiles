@@ -24,6 +24,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-rails'
 Bundle 'aaronjensen/vim-sass-status'
+Bundle 'tpope/vim-surround'
 
 filetype plugin indent on
 " }
