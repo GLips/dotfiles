@@ -4,7 +4,7 @@ imap <silent> <C-k> _
 imap <silent> <C-d> -
 
 " Tabs {
-map <C-t> <Esc>:tabfind ./%:h<CR>
+map <C-t> <Esc>:tabfind %:h<CR>
 map <C-l> :tabnext<CR>
 map <C-h> :tabprevious<CR>
 " }
