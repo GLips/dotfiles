@@ -25,6 +25,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-rails'
 Bundle 'aaronjensen/vim-sass-status'
 Bundle 'tpope/vim-surround'
+Bundle 'airblade/vim-gitgutter'
 
 filetype plugin indent on
 " }
@@ -44,7 +45,7 @@ set laststatus=2 " Always show status bar at the bottom
 set autoindent
 set cindent
 set incsearch " Search as you type
-set noexpandtab
+set expandtab
 set tabstop=2
 set shiftwidth=2
 
