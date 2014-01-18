@@ -7,6 +7,8 @@ alias defend="bundle exec guard"
 alias grep="grep --color=auto"
 alias g="git"
 alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
 alias c="clear"
 alias s="ssh"
 
