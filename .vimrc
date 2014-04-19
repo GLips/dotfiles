@@ -26,6 +26,10 @@ Bundle 'tpope/vim-rails'
 Bundle 'aaronjensen/vim-sass-status'
 Bundle 'tpope/vim-surround'
 Bundle 'airblade/vim-gitgutter'
+Bundle 'tpope/vim-haml'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'mustache/vim-mustache-handlebars'
+Bundle 'derekwyatt/vim-scala'
 
 filetype plugin indent on
 " }
@@ -64,6 +68,8 @@ set splitright
 " Ignore case when searching unless searching with a capital letter
 set ignorecase
 set smartcase
+
+let g:mustache_abbreviations = 1
 " }
 
 " Appearance {
@@ -76,8 +82,7 @@ set scrolloff=5 " Always want some context around the cursor line
 
 " Syntax! {
 syntax on
-au BufRead,BufNewFile,BufWrite {*.less,*.sass,*.scss} set ft=css
-au BufRead,BufNewFile,BufWrite {*.coffee,*.json} set ft=javascript
+au BufRead,BufNewFile,BufWrite {*.json} set ft=javascript
 
 " Markdown files
 au BufRead,BufNewFile {*.md} set filetype=markdown
