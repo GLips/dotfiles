@@ -26,6 +26,9 @@ inoremap <C-g> <Esc>A
 " Why shift when you can .. not?
 nnoremap ; :
 
+" make Y consistent with C and D
+nnoremap Y y$"y
+
 " Change paste--switch the word with the current contents of the register
 nmap cp "_cw<C-R>"<Esc>
 
