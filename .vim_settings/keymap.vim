@@ -1,8 +1,3 @@
-" Now using the middle finger of either hand you can type
-" underscores with ctrl-k and dashes with ctrl-d
-imap <silent> <C-k> _
-imap <silent> <C-d> -
-
 " Tabs {
 map <C-t> <Esc>:tabfind %:h<CR>
 map <C-l> :tabnext<CR>

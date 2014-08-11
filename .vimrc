@@ -34,7 +34,8 @@ Bundle 'derekwyatt/vim-scala'
 Bundle 'luochen1990/rainbow'
 Bundle 'Blackrush/vim-gocode'
 Bundle 'jistr/vim-nerdtree-tabs'
-Plugin 'bling/vim-airline'
+Bundle 'bling/vim-airline'
+Bundle 'Valloric/YouCompleteMe'
 
 filetype plugin indent on
 " }
