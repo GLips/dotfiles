@@ -30,6 +30,10 @@ Bundle 'tpope/vim-haml'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'mustache/vim-mustache-handlebars'
 Bundle 'derekwyatt/vim-scala'
+Bundle 'luochen1990/rainbow'
+Bundle 'Blackrush/vim-gocode'
+Bundle 'jistr/vim-nerdtree-tabs'
+Plugin 'bling/vim-airline'
 
 filetype plugin indent on
 " }
@@ -101,6 +105,7 @@ endif
 
 set hlsearch
 hi Search guibg=Magenta
+hi Comment cterm=bold ctermfg=DarkGray
 
 " Auto-reload after making changes to the .vimrc
 au! BufWritePost .vimrc source %
