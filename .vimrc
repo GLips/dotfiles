@@ -36,6 +36,7 @@ Bundle 'Blackrush/vim-gocode'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'bling/vim-airline'
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'gabrielelana/vim-markdown'
 
 filetype plugin indent on
 " }
@@ -93,7 +94,6 @@ au BufRead,BufNewFile,BufWrite {*.json} set ft=javascript
 " Markdown files
 au BufRead,BufNewFile {*.md} set filetype=markdown
 au BufRead,BufNewFile {*.md} setlocal spell
-au BufRead,BufNewFile {*.md} setlocal textwidth=80
 " }
 
 " Tabular mappings {
