@@ -38,6 +38,7 @@ Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'bling/vim-airline'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'gabrielelana/vim-markdown'
+Bundle 'pangloss/vim-javascript'
 
 filetype plugin indent on
 " }
