@@ -38,10 +38,19 @@ function gp() {
 	grep -R "$1" $2
 }
 function lgrep() {
+	if [ "$#" -eq 0 ]; then
+		echo "Usage:"
+		echo "lgrep filename.html"
+		echo "lgrep ./any/file/path/ filename.html"
+		echo "lgrep -R ./any/file/path/ filename.html # Uses find instead of ls, recursively checks directories for a named file."
+	fi
 	if [ "$#" -eq 1 ]; then
 		l | grep "$1"
 	fi
 	if [ "$#" -eq 2 ]; then
 		l $1 | grep "$2"
+	fi
+	if [ "$#" -eq 3 ]; then
+		find $2 | grep "$3"
 	fi
 }
