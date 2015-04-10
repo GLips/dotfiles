@@ -12,6 +12,12 @@ noremap ∆ <C-w>j
 noremap ˚ <C-w>k
 " }
 
+" Splits {
+" Mac style mappings to move the current tab to the left and right
+nnoremap <silent> Ó :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+nnoremap <silent> Ò :execute 'silent! tabmove ' . tabpagenr()<CR>
+" }
+
 " Use jj to exit insert mode. Nobody ever types jj.
 inoremap jj <Esc>
 
@@ -22,7 +28,7 @@ inoremap <C-g> <Esc>A
 nnoremap ; :
 
 " make Y consistent with C and D
-nnoremap Y y$"y
+nnoremap <silent> Y y$
 
 " Change paste--switch the word with the current contents of the register
 nmap cp "_cw<C-R>"<Esc>
