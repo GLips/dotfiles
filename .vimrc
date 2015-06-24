@@ -39,6 +39,7 @@ Bundle 'bling/vim-airline'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'gabrielelana/vim-markdown'
 Bundle 'pangloss/vim-javascript'
+Bundle 'FelikZ/ctrlp-py-matcher'
 
 filetype plugin indent on
 " }
