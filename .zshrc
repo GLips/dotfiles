@@ -97,6 +97,7 @@ alias ml="m ls"
 alias ma="m att -t"
 
 # Neovim
+alias oldvim="/usr/bin/vim"
 alias vim="nvim"
 
 # Claude

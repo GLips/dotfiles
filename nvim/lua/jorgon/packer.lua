@@ -15,7 +15,12 @@ use {
         }
 }
 
-use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
+-- Use master branch for stable API
+use {
+  'nvim-treesitter/nvim-treesitter',
+  branch = 'master',
+  run = ':TSUpdate'
+}
 
 -- File tree explorer
 use {
@@ -48,5 +53,29 @@ use {
     'saadparwaiz1/cmp_luasnip',
   }
 }
+
+-- Git signs
+use 'lewis6991/gitsigns.nvim'
+
+-- Trouble - Pretty diagnostics list
+use {
+  'folke/trouble.nvim',
+  requires = 'nvim-tree/nvim-web-devicons',
+}
+
+-- Error Lens - Inline error messages
+use 'chikko80/error-lens.nvim'
+
+-- Colorscheme with excellent treesitter support
+use 'folke/tokyonight.nvim'
+
+-- Simple indentation guides
+use "lukas-reineke/indent-blankline.nvim"
+
+-- Rainbow delimiters for matching brackets
+use 'HiPhish/rainbow-delimiters.nvim'
+
+-- Detect tabstop and shiftwidth automatically
+use 'tpope/vim-sleuth'
 
 end)
