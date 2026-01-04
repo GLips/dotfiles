@@ -47,6 +47,30 @@ fi
 source /opt/homebrew/opt/fzf/shell/completion.zsh
 source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
 
+# Enhanced fzf with previews
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border --preview-window=right:60%"
+export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :500 {}'"
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+
+# ------------------------------
+# History Configuration
+# ------------------------------
+HISTSIZE=50000
+SAVEHIST=50000
+setopt EXTENDED_HISTORY          # Write timestamp to history
+setopt INC_APPEND_HISTORY        # Add commands as they are typed
+setopt SHARE_HISTORY             # Share history between sessions
+setopt HIST_IGNORE_DUPS          # Ignore consecutive duplicates
+setopt HIST_IGNORE_SPACE         # Ignore commands starting with space
+
+# ------------------------------
+# Completion Configuration
+# ------------------------------
+# Case-insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+# Menu selection for completion
+zstyle ':completion:*' menu select
+
 # ------------------------------
 # Aliases
 # ------------------------------
@@ -77,6 +101,17 @@ alias vim="nvim"
 
 # Claude
 alias claude="/Users/graham/.claude/local/claude"
+
+# ------------------------------
+# Functions
+# ------------------------------
+# Quick backup of files
+bak() { cp "$1" "$1.bak"; }
+
+# ------------------------------
+# zoxide (smarter cd)
+# ------------------------------
+eval "$(zoxide init zsh)"
 
 # ------------------------------
 # nvm (lazy loaded for faster startup)
