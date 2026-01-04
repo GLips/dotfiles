@@ -1,5 +1,8 @@
 -- Leader is set in init.lua
-vim.keymap.set("n", ";", ":")
+-- vim.keymap.set("n", ";", ":")
+
+-- jj to escape in insert mode
+vim.keymap.set("i", "jj", "<Esc>", { desc = "Exit insert mode" })
 
 -- Yank to system clipboard (only y, not d or c)
 vim.keymap.set({"n", "v"}, "y", '"+y', { desc = "Yank to system clipboard" })

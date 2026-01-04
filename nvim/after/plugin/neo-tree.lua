@@ -5,12 +5,28 @@ require("neo-tree").setup({
   enable_git_status = true,
   enable_diagnostics = true,
 
+  -- Integration with snacks.nvim for smart renaming
+  event_handlers = {
+    {
+      event = "file_moved",
+      handler = function(data)
+        require("snacks").rename.on_rename_file(data.source, data.destination)
+      end,
+    },
+    {
+      event = "file_renamed",
+      handler = function(data)
+        require("snacks").rename.on_rename_file(data.source, data.destination)
+      end,
+    },
+  },
+
   window = {
     position = "left",
     width = 30,
     mappings = {
       -- Custom keybindings (most defaults work great!)
-      ["t"] = "open_tabnew",
+      -- ["t"] = "open_tabnew",
       ["v"] = "open_vsplit",
       ["s"] = "open_split",
       ["|"] = "open_vsplit",  -- Matching vim/tmux bindings
@@ -44,7 +60,7 @@ require("neo-tree").setup({
         untracked = "",
         ignored   = "",
         unstaged  = "󰄱",
-        staged    = "",
+        staged    = ".",
         conflict  = "",
       }
     },
@@ -57,16 +73,19 @@ vim.keymap.set("n", "<C-n>", ":Neotree toggle<CR>", { silent = true })
 -- Open Neo-tree by default when starting Neovim
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
-    vim.cmd("Neotree show")
-    -- Focus on the file window, not the tree
-    vim.cmd('wincmd l')
+    -- Small delay to avoid session restore conflicts
+    vim.defer_fn(function()
+      vim.cmd("Neotree show")
+      -- Focus on the file window, not the tree
+      vim.cmd('wincmd l')
+    end, 10)
   end,
 })
 
--- Auto-open Neo-tree when entering a new tab with a file
-vim.api.nvim_create_autocmd("TabEnter", {
+-- When creating a new tab, open neo-tree and focus editor
+vim.api.nvim_create_autocmd("TabNewEntered", {
   callback = function()
-    -- Check if neo-tree is not already open in this tab
+    -- Check if neo-tree is already open in this new tab
     local neo_tree_open = false
     for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
       local buf = vim.api.nvim_win_get_buf(win)
@@ -79,16 +98,44 @@ vim.api.nvim_create_autocmd("TabEnter", {
 
     if not neo_tree_open then
       vim.cmd("Neotree show")
+      -- Focus the editor window
+      vim.schedule(function()
+        for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+          local buf = vim.api.nvim_win_get_buf(win)
+          local ft = vim.api.nvim_buf_get_option(buf, 'filetype')
+          if ft ~= 'neo-tree' then
+            vim.api.nvim_set_current_win(win)
+            break
+          end
+        end
+      end)
     end
+  end,
+})
 
-    -- ALWAYS focus the editor window when switching tabs
-    -- Find the first non-neo-tree window and focus it
+-- When switching tabs, focus the editor window
+vim.api.nvim_create_autocmd("TabEnter", {
+  callback = function()
+    -- Focus the editor window when switching tabs
     for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
       local buf = vim.api.nvim_win_get_buf(win)
       local ft = vim.api.nvim_buf_get_option(buf, 'filetype')
       if ft ~= 'neo-tree' then
         vim.api.nvim_set_current_win(win)
         break
+      end
+    end
+  end,
+})
+
+-- Session management: Close neo-tree before saving session
+vim.api.nvim_create_autocmd("VimLeavePre", {
+  callback = function()
+    -- Close all neo-tree windows before saving session
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+      local buf = vim.api.nvim_win_get_buf(win)
+      if vim.bo[buf].filetype == 'neo-tree' then
+        vim.api.nvim_win_close(win, false)
       end
     end
   end,
