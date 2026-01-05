@@ -43,3 +43,7 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor
 vim.opt.scrolloff = 10
+
+-- Set terminal title to show filename (bubbles up through tmux to Ghostty tab)
+vim.opt.title = true
+vim.opt.titlestring = "%t%( %m%)"  -- filename (and [+] if modified)

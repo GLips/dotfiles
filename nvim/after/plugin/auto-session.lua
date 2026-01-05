@@ -13,6 +13,11 @@ auto_session.setup {
   auto_restore_enabled = true,
   auto_session_suppress_dirs = { "~/", "~/Downloads", "/", "/tmp" },
   auto_session_use_git_branch = false,
+  
+  -- Don't save fold settings - use config instead
+  session_lens = {
+    load_on_setup = true,
+  },
 
   -- Critical: Allow args so it works when opening nvim in a directory
   auto_session_allowed_dirs = nil,

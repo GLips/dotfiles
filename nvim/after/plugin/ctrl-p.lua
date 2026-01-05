@@ -58,6 +58,9 @@ local function ctrl_p()
     sorter = require('telescope.config').values.file_sorter({}),
     previewer = require('telescope.config').values.file_previewer({}),
     attach_mappings = function(prompt_bufnr, map)
+      -- Alt+Backspace to delete word
+      map('i', '<M-BS>', function() vim.api.nvim_input("<C-w>") end)
+      
       actions.select_default:replace(function()
         local selection = action_state.get_selected_entry()
         actions.close(prompt_bufnr)

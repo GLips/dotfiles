@@ -19,6 +19,13 @@ require('telescope').setup {
         preview_width = 0.55,
       },
     },
+    -- Keybindings
+    mappings = {
+      i = {
+        -- Alt+Backspace to delete word
+        ["<M-BS>"] = function() vim.api.nvim_input("<C-w>") end,
+      },
+    },
   },
   pickers = {
     find_files = {

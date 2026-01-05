@@ -40,6 +40,15 @@ vim.opt.cursorline = true
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+-- TreeSitter-based folding
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldenable = true
+vim.opt.foldlevel = 99  -- Start with all folds open
+
+-- Only save buffers and tabs in sessions, not settings
+-- This prevents stale config settings from being restored
+vim.opt.sessionoptions = "buffers,tabpages"
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',

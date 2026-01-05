@@ -31,18 +31,28 @@ require('gitsigns').setup {
       vim.keymap.set(mode, l, r, opts)
     end
 
-    -- Navigation
-    map('n', ']c', function()
-      if vim.wo.diff then return ']c' end
-      vim.schedule(function() gs.next_hunk() end)
-      return '<Ignore>'
-    end, {expr=true, desc = 'Next hunk'})
+    -- Make hunk navigation repeatable with ; and ,
+    local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
+    local next_hunk_repeat, prev_hunk_repeat = ts_repeat_move.make_repeatable_move_pair(
+      function()
+        if vim.wo.diff then
+          vim.cmd.normal({']c', bang = true})
+        else
+          gs.next_hunk()
+        end
+      end,
+      function()
+        if vim.wo.diff then
+          vim.cmd.normal({'[c', bang = true})
+        else
+          gs.prev_hunk()
+        end
+      end
+    )
 
-    map('n', '[c', function()
-      if vim.wo.diff then return '[c' end
-      vim.schedule(function() gs.prev_hunk() end)
-      return '<Ignore>'
-    end, {expr=true, desc = 'Previous hunk'})
+    -- Navigation
+    map('n', ']c', next_hunk_repeat, {desc = 'Next hunk'})
+    map('n', '[c', prev_hunk_repeat, {desc = 'Previous hunk'})
 
     -- Actions
     map('n', '<leader>hs', gs.stage_hunk, {desc = 'Stage hunk'})

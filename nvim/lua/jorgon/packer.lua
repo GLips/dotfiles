@@ -121,12 +121,7 @@ use 'HiPhish/rainbow-delimiters.nvim'
 use 'tpope/vim-sleuth'
 
 -- Smart commenting
-use {
-  'numToStr/Comment.nvim',
-  config = function()
-    require('Comment').setup()
-  end
-}
+use 'numToStr/Comment.nvim'
 
 -- Auto pairs for brackets, quotes, etc.
 use {
@@ -152,8 +147,22 @@ use {
   requires = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' }
 }
 
+-- Tmux Navigator - Seamless navigation between tmux and vim panes
+use 'christoomey/vim-tmux-navigator'
+
 -- Auto session management
 use 'rmagatti/auto-session'
+
+-- Formatting plugin with support for multiple formatters
+use 'stevearc/conform.nvim'
+
+-- Flash - Fast and modern motion plugin
+use {
+  'folke/flash.nvim',
+  config = function()
+    require('flash').setup()
+  end
+}
 
 -- Note: Using enhanced native tabs instead of barbar
 

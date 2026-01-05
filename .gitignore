@@ -1,1 +1,6 @@
 bash/cp_specific.bash
+nvim/plugin/*
+README.md
+init.sh
+.claude/*
+opencode/antigravity-accounts.json

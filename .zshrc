@@ -95,6 +95,7 @@ alias s="ssh"
 alias m="tmux"
 alias ml="m ls"
 alias ma="m att -t"
+alias mux="tmuxinator"
 
 # Neovim
 alias oldvim="/usr/bin/vim"
@@ -160,3 +161,6 @@ if [ -f '/Users/graham/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/User
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/graham/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/graham/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Added by Antigravity
+export PATH="/Users/graham/.antigravity/antigravity/bin:$PATH"

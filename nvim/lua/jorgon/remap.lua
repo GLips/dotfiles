@@ -19,11 +19,14 @@ vim.keymap.set("n", "<C-S-n>", ":set number!<CR>", { desc = "Toggle line numbers
 vim.keymap.set("n", "<leader>|", ":vsplit<CR>", { desc = "Vertical split" })
 vim.keymap.set("n", "<leader>=", ":split<CR>", { desc = "Horizontal split" })
 
--- Window navigation with Alt+hjkl
-vim.keymap.set("n", "<M-h>", "<C-w>h")
-vim.keymap.set("n", "<M-l>", "<C-w>l")
-vim.keymap.set("n", "<M-j>", "<C-w>j")
-vim.keymap.set("n", "<M-k>", "<C-w>k")
+-- Window navigation with Alt+hjkl (works with tmux-navigator)
+-- Disable default vim-tmux-navigator keybindings
+vim.g.tmux_navigator_no_mappings = 1
+
+vim.keymap.set("n", "<M-h>", ":TmuxNavigateLeft<CR>", { silent = true })
+vim.keymap.set("n", "<M-l>", ":TmuxNavigateRight<CR>", { silent = true })
+vim.keymap.set("n", "<M-j>", ":TmuxNavigateDown<CR>", { silent = true })
+vim.keymap.set("n", "<M-k>", ":TmuxNavigateUp<CR>", { silent = true })
 
 -- Alt+Backspace to delete previous word in insert mode
 vim.keymap.set("i", "<M-BS>", "<C-w>")
