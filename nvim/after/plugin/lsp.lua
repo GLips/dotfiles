@@ -4,6 +4,8 @@ require("mason-lspconfig").setup({
   ensure_installed = {
     "ts_ls",     -- TypeScript/JavaScript
     "lua_ls",    -- Lua
+    "biome",     -- Fast linter/formatter for JS/TS
+    "eslint",    -- ESLint language server
   },
   automatic_installation = true,
 })
@@ -38,16 +40,25 @@ local on_attach = function(event)
   --  Similar to document symbols, except searches over your entire project
   map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
-  -- Rename the variable under your cursor
+  -- Rename the variable under your cursor (using lspsaga for better UI)
   --  Most Language Servers support renaming across files
-  map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+  map('<leader>rn', '<cmd>Lspsaga rename<CR>', '[R]e[n]ame')
 
-  -- Execute a code action, usually your cursor needs to be on top of an error
-  -- or a suggestion from your LSP for this to activate
-  map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+  -- Execute a code action (using lspsaga for better UI)
+  map('<leader>ca', '<cmd>Lspsaga code_action<CR>', '[C]ode [A]ction')
+  map('<C-.>', '<cmd>Lspsaga code_action<CR>', '[C]ode [A]ction')  -- Alternative binding (like VSCode)
 
-  -- Opens a popup that displays documentation about the word under your cursor
-  map('K', vim.lsp.buf.hover, 'Hover Documentation')
+  -- Opens a popup that displays documentation (using lspsaga for better rendering)
+  map('K', '<cmd>Lspsaga hover_doc<CR>', 'Hover Documentation')
+
+  -- Lspsaga finder - shows references, definitions, implementations all in one
+  map('gh', '<cmd>Lspsaga finder<CR>', 'LSP Finder')
+
+  -- Peek definition (without jumping)
+  map('gp', '<cmd>Lspsaga peek_definition<CR>', '[P]eek definition')
+
+  -- Peek type definition
+  map('gt', '<cmd>Lspsaga peek_type_definition<CR>', 'Peek [T]ype definition')
 
   -- Goto Declaration (not definition - for example, in C this takes you to the header)
   map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -128,7 +139,72 @@ vim.lsp.config('lua_ls', {
 
 vim.lsp.enable('lua_ls')
 
--- Setup on_attach for both LSPs
+-- Configure Biome LSP (fast linter/formatter for JS/TS/JSON)
+vim.lsp.config('biome', {
+  cmd = { 'biome', 'lsp-proxy' },
+  filetypes = {
+    'javascript',
+    'javascriptreact',
+    'typescript',
+    'typescriptreact',
+    'json',
+    'jsonc',
+  },
+  root_markers = { 'biome.json', 'biome.jsonc' },
+  single_file_support = true,
+  capabilities = capabilities,
+})
+
+vim.lsp.enable('biome')
+
+-- Configure ESLint LSP
+vim.lsp.config('eslint', {
+  cmd = { 'vscode-eslint-language-server', '--stdio' },
+  filetypes = {
+    'javascript',
+    'javascriptreact',
+    'typescript',
+    'typescriptreact',
+  },
+  root_markers = {
+    '.eslintrc',
+    '.eslintrc.js',
+    '.eslintrc.cjs',
+    '.eslintrc.yaml',
+    '.eslintrc.yml',
+    '.eslintrc.json',
+    'eslint.config.js',
+    'package.json',
+  },
+  settings = {
+    format = false,  -- Let biome or prettier handle formatting
+    codeAction = {
+      disableRuleComment = {
+        enable = true,
+        location = "separateLine"
+      },
+      showDocumentation = {
+        enable = true,
+      }
+    },
+    codeActionOnSave = {
+      enable = false,
+      mode = "all"
+    },
+    experimental = {},
+    problems = {
+      shortenToSingleLine = false,
+    },
+    workingDirectory = {
+      mode = "auto",
+    }
+  },
+  capabilities = capabilities,
+})
+
+vim.lsp.enable('eslint')
+
+-- Setup on_attach for all LSPs
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
   callback = function(event)

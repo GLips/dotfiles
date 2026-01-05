@@ -85,6 +85,11 @@ vim.api.nvim_create_autocmd("VimEnter", {
 -- When creating a new tab, open neo-tree and focus editor
 vim.api.nvim_create_autocmd("TabNewEntered", {
   callback = function()
+    -- Don't open Neo-tree if we're opening diffview
+    if vim.g.opening_diffview then
+      return
+    end
+
     -- Check if neo-tree is already open in this new tab
     local neo_tree_open = false
     for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do

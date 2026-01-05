@@ -51,6 +51,22 @@ use {
   }
 }
 
+-- TypeScript-specific tools and actions
+use {
+  'pmizio/typescript-tools.nvim',
+  requires = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+}
+
+-- LSP UI improvements (code actions, hover, rename, finder, etc.)
+use {
+  'nvimdev/lspsaga.nvim',
+  after = 'nvim-lspconfig',
+  requires = {
+    'nvim-treesitter/nvim-treesitter',
+    'nvim-tree/nvim-web-devicons',
+  },
+}
+
 -- Autocompletion
 use {
   'hrsh7th/nvim-cmp',
@@ -65,6 +81,12 @@ use {
 
 -- Git signs
 use 'lewis6991/gitsigns.nvim'
+
+-- Git diff view with file panel
+use {
+  'sindrets/diffview.nvim',
+  requires = 'nvim-lua/plenary.nvim'
+}
 
 -- Trouble - Pretty diagnostics list
 use {
@@ -129,6 +151,9 @@ use {
   branch = 'harpoon2',
   requires = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' }
 }
+
+-- Auto session management
+use 'rmagatti/auto-session'
 
 -- Note: Using enhanced native tabs instead of barbar
 
