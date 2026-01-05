@@ -15,6 +15,15 @@ require('mini.ai').setup { n_lines = 500 }
 --  - sr)'  - [S]urround [R]eplace [)] [']
 require('mini.surround').setup()
 
+-- Make 's' wait for next key (like 'g' does) and show which-key hints
+vim.keymap.set('n', 's', function()
+  -- Show which-key popup for 's' mappings
+  local wk_ok, wk = pcall(require, 'which-key')
+  if wk_ok then
+    wk.show({ keys = 's', mode = 'n', loop = true })
+  end
+end, { desc = '+surround' })
+
 -- mini.statusline - Simple and easy statusline
 local statusline = require('mini.statusline')
 statusline.setup { use_icons = true }

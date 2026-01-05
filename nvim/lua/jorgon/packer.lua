@@ -164,6 +164,15 @@ use {
   end
 }
 
+-- Obsidian - Obsidian vault integration
+use {
+  'epwalsh/obsidian.nvim',
+  tag = '*',
+  requires = {
+    'nvim-lua/plenary.nvim',
+  },
+}
+
 -- Note: Using enhanced native tabs instead of barbar
 
 end)

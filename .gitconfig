@@ -5,7 +5,11 @@
 	helper = osxkeychain
 [core]
 	editor = vim
+[push]
+	autoSetupRemote = true
+	default = current
 [alias]
+	undo = reset --soft HEAD^
 	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
 	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
 	ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
@@ -24,7 +28,10 @@
 	diff = diff --word-diff
 	dc = diff --cached
 	mmerge = merge --no-ff
+	unstage = reset HEAD --
 [mergetool]
 	keepBackup = true
 [color]
 	ui = true
+[init]
+	defaultBranch = main

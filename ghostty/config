@@ -51,5 +51,18 @@
 # theme = Carbonfox
 # theme = Catppuccin Mocha
 # theme = Cobalt Next Dark
-# theme = Firewatch
-theme = Flexoki Dark
+theme = Firewatch
+# theme = Flexoki Dark
+# theme = Framer
+# theme = Gruvbox Dark
+# theme = Matte Black
+# theme = Monokai Classic
+
+# Disable warning when closing tabs with active processes
+confirm-close-surface = false
+
+# Trim trailing whitespace when copying
+clipboard-trim-trailing-spaces = true
+
+# macOS: Treat Option key as Alt for terminal keybindings
+macos-option-as-alt = true

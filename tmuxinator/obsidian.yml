@@ -1,0 +1,10 @@
+# ~/.config/tmuxinator/obsidian.yml
+name: obsidian
+root: ~/Dropbox/Obsidan
+
+windows:
+  - editor:
+      layout: even-horizontal
+      panes:
+        - nvim
+        - opencode

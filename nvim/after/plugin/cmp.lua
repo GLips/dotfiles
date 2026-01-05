@@ -40,3 +40,10 @@ cmp.setup({
     { name = 'path' },      -- File path completions
   })
 })
+
+-- Disable buffer completions in markdown files
+cmp.setup.filetype('markdown', {
+  sources = {
+    { name = 'path' },      -- Keep path completions for file links
+  }
+})
