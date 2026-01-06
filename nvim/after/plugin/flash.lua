@@ -47,9 +47,9 @@ require('flash').setup({
       -- Multi-line character search
       multi_line = true,
     },
-    -- Options for search
+    -- Options for search - DISABLED so Flash doesn't hijack / search
     search = {
-      enabled = true,
+      enabled = false,
     },
     -- Options for treesitter
     treesitter = {
@@ -65,8 +65,15 @@ require('flash').setup({
 
 -- Keymaps
 vim.keymap.set({ 'n', 'x', 'o' }, 'gs', function() require('flash').jump() end, { desc = 'Flash jump search' })
-vim.keymap.set({ 'n', 'x', 'o' }, 'gS', function() require('flash').treesitter() end,
-  { desc = 'Flash treesitter search' })
+vim.keymap.set({ 'n', 'x', 'o' }, 'gS', function() 
+  require('flash').treesitter({
+    -- Add keybindings to expand/contract while in treesitter mode
+    actions = {
+      [';'] = 'next',  -- expand to parent
+      [','] = 'prev',  -- contract to child
+    }
+  })
+end, { desc = 'Flash treesitter (use ; to expand, , to contract)' })
 vim.keymap.set('o', 'r', function() require('flash').remote() end, { desc = 'Flash remote operation' })
 vim.keymap.set({ 'o', 'x' }, 'R', function() require('flash').treesitter_search() end,
   { desc = 'Flash treesitter search (visual)' })

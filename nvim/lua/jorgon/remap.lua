@@ -33,3 +33,11 @@ end
 
 -- Alt+Backspace to delete previous word in insert mode
 vim.keymap.set("i", "<M-BS>", "<C-w>")
+
+-- Unmap space in visual mode (leader key, not useful for moving forward)
+vim.keymap.set("x", "<Space>", "<Nop>", { desc = "Disabled (use as leader)" })
+
+-- Visual mode: exit and place cursor at start/end of selection
+-- Mnemonic: <leader>i like I (insert at beginning), <leader>a like A (append at end)
+vim.keymap.set("x", "<leader>i", "<Esc>`<", { desc = "Exit visual, cursor at start" })
+vim.keymap.set("x", "<leader>a", "<Esc>`>", { desc = "Exit visual, cursor at end" })

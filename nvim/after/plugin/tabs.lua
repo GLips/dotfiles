@@ -60,8 +60,7 @@ end
 vim.keymap.set('n', '<C-S-h>', ':-tabmove<CR>', { desc = 'Move tab left', silent = true })
 vim.keymap.set('n', '<C-S-l>', ':+tabmove<CR>', { desc = 'Move tab right', silent = true })
 
--- New tab
-vim.keymap.set('n', '<C-t>', ':tabnew<CR>', { desc = 'New tab' })
+-- Ctrl+t opens Telescope file picker in new tab (defined in telescope.lua)
 
 -- Go to specific tab number
 for i = 1, 9 do

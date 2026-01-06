@@ -26,6 +26,12 @@ require('telescope').setup {
       i = {
         -- Alt+Backspace to delete word
         ["<M-BS>"] = function() vim.api.nvim_input("<C-w>") end,
+        -- Enter opens file in new tab
+        ["<CR>"] = "select_tab",
+      },
+      n = {
+        -- Enter opens file in new tab
+        ["<CR>"] = "select_tab",
       },
     },
   },
@@ -55,4 +61,7 @@ vim.keymap.set('n', '<leader>ps', function()
 	builtin.grep_string({ search = vim.fn.input("Grep > ") });
 end, { desc = 'Telescope grep' })
 vim.keymap.set('n', '<leader>pg', builtin.live_grep, { desc = 'Telescope live grep' })
+
+-- Ctrl+t opens Telescope file picker, selections open in new tab
+vim.keymap.set('n', '<C-t>', builtin.find_files, { desc = 'Telescope find files (opens in new tab)' })
 

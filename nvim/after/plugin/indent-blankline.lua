@@ -38,4 +38,3 @@ require("ibl").setup({
 })
 
 hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
-

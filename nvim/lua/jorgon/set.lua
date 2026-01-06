@@ -25,6 +25,9 @@ vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
+-- Show search count message when searching (e.g., "[1/5]")
+vim.opt.shortmess:remove("S")
+
 -- Keep signcolumn on by default (for git signs, LSP diagnostics, etc.)
 vim.opt.signcolumn = 'yes'
 

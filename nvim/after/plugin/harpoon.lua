@@ -81,14 +81,58 @@ local function show_list_selector()
   -- Create buffer
   local buf = vim.api.nvim_create_buf(false, true)
 
-  -- Set buffer content
-  vim.api.nvim_buf_set_lines(buf, 0, -1, false, all_lists)
-
-  -- Calculate window size and position
-  local width = 40
+  -- Calculate window size first
+  local width = 35
   local height = #all_lists
   local row = math.floor((vim.o.lines - height) / 2)
   local col = math.floor((vim.o.columns - width) / 2)
+
+  -- Build display lines with numbering and item counts
+  local display_lines = {}
+  local current_active = active_list or "default"
+  local highlight_lines = {}
+  
+  for i, list_name in ipairs(all_lists) do
+    -- Get the list and count items properly
+    local list
+    if list_name == "default" then
+      list = harpoon:list()
+    else
+      list = harpoon:list(list_name)
+    end
+    
+    local item_count = 0
+    if list and list.items then
+      item_count = #list.items
+    end
+    
+    local is_active = (list_name == current_active)
+    
+    -- Build the line with proper spacing
+    local prefix
+    if is_active then
+      prefix = string.format("%d. * ", i)
+    else
+      prefix = string.format("%d.   ", i)
+    end
+    
+    local count_str = string.format("(%d)", item_count)
+    -- Calculate available space for list name
+    -- width - 4 (border padding) - prefix length - count length - 1 space before count
+    local name_width = width - 4 - #prefix - #count_str - 1
+    local name_padded = string.format("%-" .. name_width .. "s", list_name)
+    
+    local line = "  " .. prefix .. name_padded .. " " .. count_str
+    
+    if is_active then
+      table.insert(highlight_lines, i - 1)
+    end
+    
+    table.insert(display_lines, line)
+  end
+
+  -- Set buffer content
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, display_lines)
 
   -- Create floating window
   local win = vim.api.nvim_open_win(buf, true, {
@@ -106,6 +150,114 @@ local function show_list_selector()
   -- Set buffer options
   vim.bo[buf].modifiable = false
   vim.bo[buf].bufhidden = 'wipe'
+
+  -- Add highlighting for active list
+  local ns_id = vim.api.nvim_create_namespace('harpoon_list_selector')
+  for _, line_idx in ipairs(highlight_lines) do
+    -- Highlight the entire line
+    vim.api.nvim_buf_add_highlight(buf, ns_id, 'CursorLine', line_idx, 0, -1)
+    -- Make the asterisk stand out with a special color
+    vim.api.nvim_buf_add_highlight(buf, ns_id, 'DiagnosticOk', line_idx, 6, 7)
+  end
+  
+  -- Preview window (declare before autocmd so it can be accessed)
+  local preview_win = nil
+  local preview_buf = nil
+  
+  local function show_preview()
+    local line = vim.fn.line('.')
+    local list_name = all_lists[line]
+    
+    if not list_name then return end
+    
+    -- Get the list items
+    local list
+    if list_name == "default" then
+      list = harpoon:list()
+    else
+      list = harpoon:list(list_name)
+    end
+    
+    local preview_lines = {}
+    if list and list.items and #list.items > 0 then
+      for i, item in ipairs(list.items) do
+        -- Show filename only (not full path)
+        local filename = vim.fn.fnamemodify(item.value, ':t')
+        table.insert(preview_lines, string.format("  %d. %s", i, filename))
+      end
+    else
+      table.insert(preview_lines, "  (empty)")
+    end
+    
+    -- Create or update preview buffer
+    if not preview_buf or not vim.api.nvim_buf_is_valid(preview_buf) then
+      preview_buf = vim.api.nvim_create_buf(false, true)
+      vim.bo[preview_buf].bufhidden = 'wipe'
+    end
+    
+    -- Make buffer modifiable, update content, then make it unmodifiable again
+    vim.bo[preview_buf].modifiable = true
+    vim.api.nvim_buf_set_lines(preview_buf, 0, -1, false, preview_lines)
+    vim.bo[preview_buf].modifiable = false
+    
+    -- Calculate preview window position (to the right of selector)
+    local preview_width = 40
+    local preview_height = math.max(#preview_lines, 3)
+    local preview_row = row
+    local preview_col = col + width + 2
+    
+    -- Create or update preview window
+    if not preview_win or not vim.api.nvim_win_is_valid(preview_win) then
+      preview_win = vim.api.nvim_open_win(preview_buf, false, {
+        relative = 'editor',
+        width = preview_width,
+        height = preview_height,
+        row = preview_row,
+        col = preview_col,
+        style = 'minimal',
+        border = 'rounded',
+        title = ' Files ',
+        title_pos = 'center',
+      })
+    else
+      vim.api.nvim_win_set_config(preview_win, {
+        relative = 'editor',
+        width = preview_width,
+        height = preview_height,
+        row = preview_row,
+        col = preview_col,
+      })
+    end
+  end
+  
+  -- Show initial preview
+  show_preview()
+  
+  -- Update preview on cursor move
+  vim.api.nvim_create_autocmd("CursorMoved", {
+    buffer = buf,
+    callback = function()
+      show_preview()
+    end,
+  })
+  
+  -- Auto-close both windows when main window loses focus
+  vim.api.nvim_create_autocmd({"WinLeave", "BufLeave"}, {
+    buffer = buf,
+    callback = function()
+      -- Small delay to ensure window navigation has completed
+      vim.schedule(function()
+        -- Check if we've navigated away from the selector window
+        if vim.api.nvim_get_current_win() ~= win and vim.api.nvim_win_is_valid(win) then
+          vim.api.nvim_win_close(win, true)
+        end
+        -- Always try to close preview window when selector closes
+        if preview_win and vim.api.nvim_win_is_valid(preview_win) then
+          vim.api.nvim_win_close(preview_win, true)
+        end
+      end)
+    end,
+  })
 
   -- Keymaps for the selector window
   local function select_list()
@@ -131,17 +283,41 @@ local function show_list_selector()
     end
   end
 
+  -- Helper to close both windows
+  local function close_windows()
+    if vim.api.nvim_win_is_valid(win) then
+      vim.api.nvim_win_close(win, true)
+    end
+    if preview_win and vim.api.nvim_win_is_valid(preview_win) then
+      vim.api.nvim_win_close(preview_win, true)
+    end
+  end
+  
   -- Enter to select
   vim.keymap.set('n', '<CR>', select_list, { buffer = buf, nowait = true })
-  vim.keymap.set('n', '<Esc>', function()
-    vim.api.nvim_win_close(win, true)
-  end, { buffer = buf, nowait = true })
-  vim.keymap.set('n', 'q', function()
-    vim.api.nvim_win_close(win, true)
-  end, { buffer = buf, nowait = true })
-  vim.keymap.set('n', '<C-e>', function()
-    vim.api.nvim_win_close(win, true)
-  end, { buffer = buf, nowait = true })
+  vim.keymap.set('n', '<Esc>', close_windows, { buffer = buf, nowait = true })
+  vim.keymap.set('n', 'q', close_windows, { buffer = buf, nowait = true })
+  vim.keymap.set('n', '<C-e>', close_windows, { buffer = buf, nowait = true })
+  
+  -- Allow number keys to quickly select
+  for i = 1, #all_lists do
+    vim.keymap.set('n', tostring(i), function()
+      local choice = all_lists[i]
+      close_windows()
+      
+      if choice then
+        if choice == "default" then
+          active_list = nil
+        else
+          active_list = choice
+        end
+        
+        local list = get_active_list()
+        harpoon.ui:toggle_quick_menu(list)
+        print("Active list: " .. (active_list or "default"))
+      end
+    end, { buffer = buf, nowait = true })
+  end
 end
 
 -- Keybinding to show list selector
