@@ -25,7 +25,7 @@ fi
 
 # Install essential packages via Homebrew
 echo "Installing/updating packages via Homebrew..."
-brew install fzf zoxide bat tree tmux neovim git opencode tmuxinator biome prettier
+brew install fzf zoxide bat tree tmux neovim git opencode tmuxinator biome prettier starship
 
 # Install fzf shell integrations
 if [ -f $(brew --prefix)/opt/fzf/install ]; then
@@ -77,14 +77,6 @@ if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
 	git clone https://github.com/zsh-users/zsh-autosuggestions.git "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
 else
 	echo "✓ zsh-autosuggestions already installed"
-fi
-
-# Install Powerlevel10k theme
-if [ ! -d "$ZSH_CUSTOM/themes/powerlevel10k" ]; then
-	echo "Installing Powerlevel10k theme..."
-	brew install powerlevel10k
-else
-	echo "✓ Powerlevel10k already installed"
 fi
 
 echo ""
@@ -259,11 +251,10 @@ echo "  Setup Complete!"
 echo "========================================="
 echo ""
 echo "Next steps:"
-echo "1. If this is your first time, run: p10k configure"
-echo "2. Restart your terminal or run: source ~/.zshrc"
-echo "3. Install tmux plugins: Open tmux and press Ctrl-a + Shift-I"
-echo "4. Optional: Install a Node.js version with nvm (e.g., nvm install --lts)"
-echo "5. Optional: Install pnpm if needed"
+echo "1. Restart your terminal or run: source ~/.zshrc"
+echo "2. Install tmux plugins: Open tmux and press Ctrl-a + Shift-I"
+echo "3. Optional: Install a Node.js version with nvm (e.g., nvm install --lts)"
+echo "4. Optional: Install pnpm if needed"
 echo ""
 echo "Your old dotfiles have been backed up to ~/dotfiles_backup"
 echo ""
