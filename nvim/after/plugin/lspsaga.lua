@@ -1,3 +1,5 @@
+if vim.g.vscode then return end
+
 require('lspsaga').setup({
   -- Use default config but with some nice customizations
   ui = {

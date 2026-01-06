@@ -1,3 +1,5 @@
+if vim.g.vscode then return end
+
 -- Lualine - Statusline
 local status_ok, lualine = pcall(require, 'lualine')
 if not status_ok then
@@ -26,15 +28,6 @@ local opencode_component = {
     return status
   end,
   color = { fg = '#7aa2f7' },  -- Nice blue color
-}
-
--- Minuet AI component
-local minuet_component = {
-  require('minuet.lualine'),
-  -- Configuration options for minuet lualine component
-  display_name = 'both',  -- Show both provider and model name
-  provider_model_separator = ':',
-  display_on_idle = false,  -- Don't show when not requesting
 }
 
 lualine.setup {
@@ -71,7 +64,6 @@ lualine.setup {
       }
     },
     lualine_x = {
-      minuet_component,  -- Minuet AI status
       opencode_component,  -- OpenCode status
       'encoding',
       'fileformat',

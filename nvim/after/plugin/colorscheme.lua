@@ -1,3 +1,5 @@
+if vim.g.vscode then return end
+
 require("tokyonight").setup({
   style = "night", -- storm, moon, night, or day
   transparent = false,

@@ -1,3 +1,5 @@
+if vim.g.vscode then return end
+
 local harpoon = require("harpoon")
 
 -- Setup harpoon2 with custom lists

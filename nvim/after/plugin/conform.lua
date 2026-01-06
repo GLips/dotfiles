@@ -1,3 +1,5 @@
+if vim.g.vscode then return end
+
 require("conform").setup({
   -- Define formatters by filetype
   formatters_by_ft = {

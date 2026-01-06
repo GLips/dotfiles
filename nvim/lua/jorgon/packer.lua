@@ -3,12 +3,16 @@
 -- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.nvim]]
 
+-- Helper for plugins that should only load in regular Neovim (not VSCode)
+local not_vscode = not vim.g.vscode
+
 return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
 use {
         'nvim-telescope/telescope.nvim', tag = 'v0.2.1',
+        cond = not_vscode,
         requires = {
       	  'nvim-lua/plenary.nvim',
       	  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
@@ -23,7 +27,10 @@ use {
 }
 
 -- Show code context (function/class you're in) at top of screen
-use 'nvim-treesitter/nvim-treesitter-context'
+use {
+  'nvim-treesitter/nvim-treesitter-context',
+  cond = not_vscode,
+}
 
 -- Treesitter text objects for functions, classes, parameters
 use {
@@ -35,6 +42,7 @@ use {
 use {
   'nvim-neo-tree/neo-tree.nvim',
   branch = 'v3.x',
+  cond = not_vscode,
   requires = {
     'nvim-lua/plenary.nvim',
     'nvim-tree/nvim-web-devicons',
@@ -45,6 +53,7 @@ use {
 -- LSP Support
 use {
   'neovim/nvim-lspconfig',
+  cond = not_vscode,
   requires = {
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
@@ -54,12 +63,14 @@ use {
 -- TypeScript-specific tools and actions
 use {
   'pmizio/typescript-tools.nvim',
+  cond = not_vscode,
   requires = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
 }
 
 -- LSP UI improvements (code actions, hover, rename, finder, etc.)
 use {
   'nvimdev/lspsaga.nvim',
+  cond = not_vscode,
   after = 'nvim-lspconfig',
   requires = {
     'nvim-treesitter/nvim-treesitter',
@@ -70,6 +81,7 @@ use {
 -- Autocompletion
 use {
   'hrsh7th/nvim-cmp',
+  cond = not_vscode,
   requires = {
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-buffer',
@@ -80,17 +92,22 @@ use {
 }
 
 -- Git signs
-use 'lewis6991/gitsigns.nvim'
+use {
+  'lewis6991/gitsigns.nvim',
+  cond = not_vscode,
+}
 
 -- Git diff view with file panel
 use {
   'sindrets/diffview.nvim',
+  cond = not_vscode,
   requires = 'nvim-lua/plenary.nvim'
 }
 
 -- Trouble - Pretty diagnostics list
 use {
   'folke/trouble.nvim',
+  cond = not_vscode,
   requires = 'nvim-tree/nvim-web-devicons',
 }
 
@@ -103,29 +120,42 @@ use {
 }
 
 -- Snacks - Collection of useful utilities
-use 'folke/snacks.nvim'
+use {
+  'folke/snacks.nvim',
+  cond = not_vscode,
+}
 
 -- Error Lens - Inline error messages
-use 'chikko80/error-lens.nvim'
+use {
+  'chikko80/error-lens.nvim',
+  cond = not_vscode,
+}
 
 -- Colorscheme with excellent treesitter support
-use 'folke/tokyonight.nvim'
+use {
+  'folke/tokyonight.nvim',
+  cond = not_vscode,
+}
 
 -- Simple indentation guides
-use "lukas-reineke/indent-blankline.nvim"
+use {
+  "lukas-reineke/indent-blankline.nvim",
+  cond = not_vscode,
+}
 
 -- Rainbow delimiters for matching brackets
-use 'HiPhish/rainbow-delimiters.nvim'
+use {
+  'HiPhish/rainbow-delimiters.nvim',
+  cond = not_vscode,
+}
 
 -- Detect tabstop and shiftwidth automatically
 use 'tpope/vim-sleuth'
 
--- Smart commenting
-use 'numToStr/Comment.nvim'
-
 -- Auto pairs for brackets, quotes, etc.
 use {
   'windwp/nvim-autopairs',
+  cond = not_vscode,
   config = function()
     require('nvim-autopairs').setup {}
   end
@@ -137,30 +167,42 @@ use 'echasnovski/mini.nvim'
 -- Lualine - Better statusline with plugin support
 use {
   'nvim-lualine/lualine.nvim',
+  cond = not_vscode,
   requires = { 'nvim-tree/nvim-web-devicons' }
 }
 
 -- Highlight and search TODO comments
 use {
   'folke/todo-comments.nvim',
+  cond = not_vscode,
   requires = 'nvim-lua/plenary.nvim'
 }
 
 -- Harpoon - Quick file navigation
 use {
   'ThePrimeagen/harpoon',
+  cond = not_vscode,
   branch = 'harpoon2',
   requires = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' }
 }
 
 -- Tmux Navigator - Seamless navigation between tmux and vim panes
-use 'christoomey/vim-tmux-navigator'
+use {
+  'christoomey/vim-tmux-navigator',
+  cond = not_vscode,
+}
 
 -- Auto session management
-use 'rmagatti/auto-session'
+use {
+  'rmagatti/auto-session',
+  cond = not_vscode,
+}
 
 -- Formatting plugin with support for multiple formatters
-use 'stevearc/conform.nvim'
+use {
+  'stevearc/conform.nvim',
+  cond = not_vscode,
+}
 
 -- Flash - Fast and modern motion plugin
 use {
@@ -173,6 +215,7 @@ use {
 -- Obsidian - Obsidian vault integration
 use {
   'epwalsh/obsidian.nvim',
+  cond = not_vscode,
   tag = '*',
   requires = {
     'nvim-lua/plenary.nvim',
@@ -182,17 +225,19 @@ use {
 -- OpenCode - AI coding assistant integration
 use {
   'NickvanDyke/opencode.nvim',
+  cond = not_vscode,
   requires = {
     'folke/snacks.nvim',
   },
 }
 
--- Minuet AI - AI-powered autocomplete (inline suggestions)
+-- Surround - Add/delete/replace surroundings (brackets, quotes, etc.)
 use {
-  'milanglacier/minuet-ai.nvim',
-  requires = {
-    'nvim-lua/plenary.nvim',
-  },
+  'kylechui/nvim-surround',
+  tag = '*',
+  config = function()
+    require('nvim-surround').setup({})
+  end
 }
 
 -- Note: Using enhanced native tabs instead of barbar

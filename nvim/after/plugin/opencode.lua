@@ -1,3 +1,5 @@
+if vim.g.vscode then return end
+
 -- OpenCode - AI coding assistant integration
 local status_ok, opencode = pcall(require, 'opencode')
 if not status_ok then

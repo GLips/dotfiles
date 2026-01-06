@@ -1,3 +1,5 @@
+if vim.g.vscode then return end
+
 -- Show the current context (function, class, etc.) at the top of the screen
 local status_ok, treesitter_context = pcall(require, 'treesitter-context')
 if not status_ok then

@@ -1,3 +1,5 @@
+if vim.g.vscode then return end
+
 require("typescript-tools").setup {
   on_attach = function(client)
     -- typescript-tools provides most features, disable some from ts_ls to avoid conflicts

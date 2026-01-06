@@ -1,3 +1,5 @@
+if vim.g.vscode then return end
+
 -- Neo-tree setup
 require("neo-tree").setup({
   close_if_last_window = true,  -- Close Neo-tree if it's the last window

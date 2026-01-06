@@ -1,3 +1,5 @@
+if vim.g.vscode then return end
+
 -- Setup Mason (LSP installer)
 require("mason").setup()
 require("mason-lspconfig").setup({

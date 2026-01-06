@@ -1,3 +1,5 @@
+if vim.g.vscode then return end
+
 -- Setup nvim-autopairs
 require('nvim-autopairs').setup {
   check_ts = true,  -- Enable treesitter

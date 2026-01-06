@@ -1,3 +1,5 @@
+if vim.g.vscode then return end
+
 require('error-lens').setup({
   enabled = true,
   auto_adjust = {

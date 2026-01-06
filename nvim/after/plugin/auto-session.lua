@@ -1,3 +1,5 @@
+if vim.g.vscode then return end
+
 -- Auto session - automatically save and restore sessions
 local status_ok, auto_session = pcall(require, 'auto-session')
 if not status_ok then
@@ -56,7 +58,5 @@ auto_session.setup {
 }
 
 -- Keybindings (using new AutoSession commands)
-vim.keymap.set('n', '<leader>ss', ':SessionSave<CR>', { desc = 'Save session' })
-vim.keymap.set('n', '<leader>sr', ':SessionRestore<CR>', { desc = 'Restore session' })
-vim.keymap.set('n', '<leader>sd', ':SessionDelete<CR>', { desc = 'Delete session' })
-vim.keymap.set('n', '<leader>sf', ':Autosession search<CR>', { desc = 'Search sessions' })
+-- Note: Auto-session handles save/restore automatically, so only search is mapped
+vim.keymap.set('n', '<leader>Sf', ':Autosession search<CR>', { desc = 'Search sessions' })

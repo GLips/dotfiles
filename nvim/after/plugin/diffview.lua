@@ -1,3 +1,5 @@
+if vim.g.vscode then return end
+
 -- Git diff view with file panel
 local status_ok, diffview = pcall(require, 'diffview')
 if not status_ok then

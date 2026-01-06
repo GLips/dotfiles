@@ -1,3 +1,5 @@
+if vim.g.vscode then return end
+
 -- Enhanced native tab configuration
 
 -- Enable mouse support for tabs (click to switch, middle-click to close)

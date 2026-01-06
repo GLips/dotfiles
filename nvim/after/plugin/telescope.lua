@@ -1,3 +1,5 @@
+if vim.g.vscode then return end
+
 -- Setup Telescope with optimizations
 require('telescope').setup {
   defaults = {

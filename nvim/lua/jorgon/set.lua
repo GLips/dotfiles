@@ -12,7 +12,8 @@ vim.opt.relativenumber = true
 vim.opt.mouse = 'a'
 
 -- Sync clipboard between OS and Neovim
-vim.opt.clipboard = 'unnamedplus'
+-- Disabled: Only 'y' commands should yank to system clipboard (see remap.lua)
+-- vim.opt.clipboard = 'unnamedplus'
 
 -- Enable break indent
 vim.opt.breakindent = true

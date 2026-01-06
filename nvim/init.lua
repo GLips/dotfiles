@@ -6,10 +6,12 @@ vim.g.maplocalleader = " "
 vim.opt.number = true
 vim.opt.relativenumber = false
 
-vim.keymap.set("n", "<C-h>", function() vim.cmd.tabprevious() end)
-vim.keymap.set("n", "<C-l>", function() vim.cmd.tabnext() end)
-
-vim.opt.termguicolors = true
+-- Tab navigation (only in regular Neovim, VSCode handles tabs)
+if not vim.g.vscode then
+  vim.keymap.set("n", "<C-h>", function() vim.cmd.tabprevious() end)
+  vim.keymap.set("n", "<C-l>", function() vim.cmd.tabnext() end)
+  vim.opt.termguicolors = true
+end
 require("jorgon")
 
 -- Make wrapped lines indent to actual text
@@ -40,15 +42,17 @@ vim.opt.cursorline = true
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- TreeSitter-based folding
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.opt.foldenable = true
-vim.opt.foldlevel = 99  -- Start with all folds open
+-- TreeSitter-based folding (only in regular Neovim, VSCode handles folding)
+if not vim.g.vscode then
+  vim.opt.foldmethod = "expr"
+  vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+  vim.opt.foldenable = true
+  vim.opt.foldlevel = 99  -- Start with all folds open
 
--- Only save buffers and tabs in sessions, not settings
--- This prevents stale config settings from being restored
-vim.opt.sessionoptions = "buffers,tabpages"
+  -- Only save buffers and tabs in sessions, not settings
+  -- This prevents stale config settings from being restored
+  vim.opt.sessionoptions = "buffers,tabpages"
+end
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',

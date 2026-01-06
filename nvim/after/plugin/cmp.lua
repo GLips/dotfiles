@@ -1,3 +1,5 @@
+if vim.g.vscode then return end
+
 local cmp = require('cmp')
 local luasnip = require('luasnip')
 

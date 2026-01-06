@@ -1,3 +1,5 @@
+if vim.g.vscode then return end
+
 local rainbow_delimiters = require('rainbow-delimiters')
 
 -- Use the same colors defined in indent-blankline

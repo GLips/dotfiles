@@ -1,3 +1,5 @@
+if vim.g.vscode then return end
+
 local telescope = require('telescope.builtin')
 local actions = require('telescope.actions')
 local action_state = require('telescope.actions.state')

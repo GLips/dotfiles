@@ -1,3 +1,5 @@
+if vim.g.vscode then return end
+
 -- Highlight and search TODO, FIXME, NOTE, etc. comments
 local status_ok, todo_comments = pcall(require, 'todo-comments')
 if not status_ok then
