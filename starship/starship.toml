@@ -126,7 +126,7 @@ format = '[ $symbol $branch ]($style)'
 
 [git_status]
 style = "bg:color_aqua bold"
-format = '([$ahead ]($style) )'
+format = '([$ahead_behind ]($style))'
 ahead = "⇅ ${count}"
 
 [custom.git_staged]
