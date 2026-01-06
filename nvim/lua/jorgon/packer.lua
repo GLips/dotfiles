@@ -134,6 +134,12 @@ use {
 -- Collection of various small independent plugins/modules
 use 'echasnovski/mini.nvim'
 
+-- Lualine - Better statusline with plugin support
+use {
+  'nvim-lualine/lualine.nvim',
+  requires = { 'nvim-tree/nvim-web-devicons' }
+}
+
 -- Highlight and search TODO comments
 use {
   'folke/todo-comments.nvim',
@@ -168,6 +174,22 @@ use {
 use {
   'epwalsh/obsidian.nvim',
   tag = '*',
+  requires = {
+    'nvim-lua/plenary.nvim',
+  },
+}
+
+-- OpenCode - AI coding assistant integration
+use {
+  'NickvanDyke/opencode.nvim',
+  requires = {
+    'folke/snacks.nvim',
+  },
+}
+
+-- Minuet AI - AI-powered autocomplete (inline suggestions)
+use {
+  'milanglacier/minuet-ai.nvim',
   requires = {
     'nvim-lua/plenary.nvim',
   },

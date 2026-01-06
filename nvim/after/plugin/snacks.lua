@@ -6,4 +6,7 @@ end
 
 snacks.setup {
   rename = { enabled = true },
+  input = { enabled = true },   -- Required for opencode.nvim ask()
+  picker = { enabled = true },  -- Required for opencode.nvim select()
+  terminal = { enabled = true }, -- Optional but useful for opencode
 }

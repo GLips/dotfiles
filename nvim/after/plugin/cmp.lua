@@ -31,10 +31,12 @@ cmp.setup({
         fallback()
       end
     end, { 'i', 's' }),
+
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },  -- LSP completions
     { name = 'luasnip' },   -- Snippet completions
+    -- Minuet removed - using virtual text instead
   }, {
     { name = 'buffer' },    -- Buffer text completions
     { name = 'path' },      -- File path completions

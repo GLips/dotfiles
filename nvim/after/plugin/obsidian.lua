@@ -47,6 +47,11 @@ require("obsidian").setup({
   -- Disable automatic frontmatter
   disable_frontmatter = true,
 
+  -- Date format (uses strftime format)
+  -- %B = full month name, %d = day, %Y = year
+  -- Result: "January 2, 2026"
+  date_format = "%B %d, %Y",
+
   -- Optional, disable completion if you don't want wiki-link suggestions
   completion = {
     nvim_cmp = true,

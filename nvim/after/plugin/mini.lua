@@ -24,12 +24,5 @@ vim.keymap.set('n', 's', function()
   end
 end, { desc = '+surround' })
 
--- mini.statusline - Simple and easy statusline
-local statusline = require('mini.statusline')
-statusline.setup { use_icons = true }
-
--- Customize statusline: show LINE:COLUMN
----@diagnostic disable-next-line: duplicate-set-field
-statusline.section_location = function()
-  return '%2l:%-2v'
-end
+-- mini.statusline disabled - using lualine instead
+-- See after/plugin/lualine.lua for statusline configuration

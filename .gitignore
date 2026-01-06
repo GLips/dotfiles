@@ -4,3 +4,7 @@ README.md
 init.sh
 .claude/*
 opencode/antigravity-accounts.json
+nvim/.env
+
+# Ralph (opencode-ralph) - autonomous agent loop files
+.ralph-*
