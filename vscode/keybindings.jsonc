@@ -1,0 +1,39 @@
+// VSCode keybindings for use with vscode-neovim and Which Key
+// Copy to your VSCode keybindings.json
+[
+  // Trigger Which Key on Space (leader key)
+  {
+    "key": "space",
+    "command": "whichkey.show",
+    "when": "editorTextFocus && neovim.mode == 'normal'"
+  },
+
+  // Alt+hjkl for editor group navigation (matches tmux-style navigation)
+  {
+    "key": "alt+h",
+    "command": "workbench.action.focusLeftGroup",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "alt+l",
+    "command": "workbench.action.focusRightGroup",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "alt+j",
+    "command": "workbench.action.focusBelowGroup",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "alt+k",
+    "command": "workbench.action.focusAboveGroup",
+    "when": "editorTextFocus"
+  },
+
+  // Quick fix with Ctrl+.
+  {
+    "key": "ctrl+.",
+    "command": "editor.action.quickFix",
+    "when": "editorTextFocus && neovim.mode != 'insert'"
+  }
+]

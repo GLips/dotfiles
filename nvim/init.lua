@@ -193,17 +193,31 @@ if vim.g.vscode then
     vscode.action('git.openChange')
   end, { desc = 'Preview hunk side-by-side (VSCode)' })
 
+  -- Normal mode: operate on hunk at cursor
   vim.keymap.set('n', '<leader>hr', function()
-    vscode.action('git.revertSelectedRanges')
+    vscode.action('git.revertChange')
   end, { desc = 'Revert hunk (VSCode)' })
 
   vim.keymap.set('n', '<leader>hs', function()
-    vscode.action('git.stageSelectedRanges')
+    vscode.action('git.stageChange')
   end, { desc = 'Stage hunk (VSCode)' })
 
   vim.keymap.set('n', '<leader>hu', function()
-    vscode.action('git.unstageSelectedRanges')
+    vscode.action('git.unstageChange')
   end, { desc = 'Unstage hunk (VSCode)' })
+
+  -- Visual mode: operate on selected lines
+  vim.keymap.set('v', '<leader>hr', function()
+    vscode.action('git.revertSelectedRanges')
+  end, { desc = 'Revert selection (VSCode)' })
+
+  vim.keymap.set('v', '<leader>hs', function()
+    vscode.action('git.stageSelectedRanges')
+  end, { desc = 'Stage selection (VSCode)' })
+
+  vim.keymap.set('v', '<leader>hu', function()
+    vscode.action('git.unstageSelectedRanges')
+  end, { desc = 'Unstage selection (VSCode)' })
 
   -- Disable options that don't apply or conflict with VSCode
   vim.opt.list = false  -- VSCode handles whitespace display

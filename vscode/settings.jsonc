@@ -1,0 +1,566 @@
+// VSCode settings for use with vscode-neovim
+// Copy relevant sections to your VSCode settings.json
+// Or symlink this file if your VSCode supports JSONC
+{
+  // ============================================
+  // vscode-neovim settings
+  // ============================================
+  "vscode-neovim.compositeKeys": {
+    "jj": {
+      "command": "vscode-neovim.escape"
+    }
+  },
+  "vscode-neovim.compositeTimeout": 200,
+
+  // Control keys passed through to Neovim (not handled by VSCode)
+  "vscode-neovim.ctrlKeysForNormalMode": [
+    "a", "b", "d", "e", "f",
+    "h", "i", "j", "k", "l",
+    "o", "r", "u", "v", "w",
+    "x", "y", "z",
+    "/", "]", "."
+  ],
+  "vscode-neovim.ctrlKeysForInsertMode": [
+    "a", "d", "h", "j", "o", "r", "u", "w"
+  ],
+
+  // ============================================
+  // Which Key configuration
+  // ============================================
+  "whichkey.delay": 200,
+  "whichkey.sortOrder": "alphabetically",
+  "whichkey.bindings": [
+    // ----------------------------------------
+    // Top-level leader bindings
+    // ----------------------------------------
+    {
+      "key": "w",
+      "name": "Save file",
+      "type": "command",
+      "command": "workbench.action.files.save"
+    },
+    {
+      "key": "q",
+      "name": "Close editor",
+      "type": "command",
+      "command": "workbench.action.closeActiveEditor"
+    },
+    {
+      "key": "f",
+      "name": "Format document",
+      "type": "command",
+      "command": "editor.action.formatDocument"
+    },
+    {
+      "key": "/",
+      "name": "Search in files",
+      "type": "command",
+      "command": "workbench.action.findInFiles"
+    },
+    {
+      "key": "e",
+      "name": "Explorer",
+      "type": "command",
+      "command": "workbench.view.explorer"
+    },
+    {
+      "key": "b",
+      "name": "Toggle sidebar",
+      "type": "command",
+      "command": "workbench.action.toggleSidebarVisibility"
+    },
+    {
+      "key": "p",
+      "name": "Command palette",
+      "type": "command",
+      "command": "workbench.action.showCommands"
+    },
+
+    // ----------------------------------------
+    // Code actions submenu (c)
+    // ----------------------------------------
+    {
+      "key": "c",
+      "name": "+Code",
+      "type": "bindings",
+      "bindings": [
+        {
+          "key": "a",
+          "name": "Code actions",
+          "type": "command",
+          "command": "editor.action.quickFix"
+        },
+        {
+          "key": "r",
+          "name": "Refactor",
+          "type": "command",
+          "command": "editor.action.refactor"
+        },
+        {
+          "key": "f",
+          "name": "Format document",
+          "type": "command",
+          "command": "editor.action.formatDocument"
+        },
+        {
+          "key": "o",
+          "name": "Organize imports",
+          "type": "command",
+          "command": "editor.action.organizeImports"
+        },
+        {
+          "key": "s",
+          "name": "Source actions",
+          "type": "command",
+          "command": "editor.action.sourceAction"
+        }
+      ]
+    },
+
+    // ----------------------------------------
+    // Rename/Refactor submenu (r)
+    // ----------------------------------------
+    {
+      "key": "r",
+      "name": "+Refactor",
+      "type": "bindings",
+      "bindings": [
+        {
+          "key": "n",
+          "name": "Rename symbol",
+          "type": "command",
+          "command": "editor.action.rename"
+        },
+        {
+          "key": "r",
+          "name": "Refactor...",
+          "type": "command",
+          "command": "editor.action.refactor"
+        }
+      ]
+    },
+
+    // ----------------------------------------
+    // Go to submenu (g)
+    // ----------------------------------------
+    {
+      "key": "g",
+      "name": "+Go to",
+      "type": "bindings",
+      "bindings": [
+        {
+          "key": "d",
+          "name": "Definition",
+          "type": "command",
+          "command": "editor.action.revealDefinition"
+        },
+        {
+          "key": "D",
+          "name": "Declaration",
+          "type": "command",
+          "command": "editor.action.revealDeclaration"
+        },
+        {
+          "key": "r",
+          "name": "References",
+          "type": "command",
+          "command": "editor.action.goToReferences"
+        },
+        {
+          "key": "i",
+          "name": "Implementation",
+          "type": "command",
+          "command": "editor.action.goToImplementation"
+        },
+        {
+          "key": "t",
+          "name": "Type definition",
+          "type": "command",
+          "command": "editor.action.goToTypeDefinition"
+        },
+        {
+          "key": "s",
+          "name": "Go to symbol",
+          "type": "command",
+          "command": "workbench.action.gotoSymbol"
+        },
+        {
+          "key": "l",
+          "name": "Go to line",
+          "type": "command",
+          "command": "workbench.action.gotoLine"
+        }
+      ]
+    },
+
+    // ----------------------------------------
+    // Search/Find submenu (s)
+    // ----------------------------------------
+    {
+      "key": "s",
+      "name": "+Search",
+      "type": "bindings",
+      "bindings": [
+        {
+          "key": "f",
+          "name": "Find in files",
+          "type": "command",
+          "command": "workbench.action.findInFiles"
+        },
+        {
+          "key": "s",
+          "name": "Go to symbol (workspace)",
+          "type": "command",
+          "command": "workbench.action.showAllSymbols"
+        },
+        {
+          "key": "r",
+          "name": "Replace in files",
+          "type": "command",
+          "command": "workbench.action.replaceInFiles"
+        }
+      ]
+    },
+
+    // ----------------------------------------
+    // Diagnostics/Errors submenu (d)
+    // ----------------------------------------
+    {
+      "key": "d",
+      "name": "+Diagnostics",
+      "type": "bindings",
+      "bindings": [
+        {
+          "key": "d",
+          "name": "Show problems",
+          "type": "command",
+          "command": "workbench.actions.view.problems"
+        },
+        {
+          "key": "n",
+          "name": "Next problem",
+          "type": "command",
+          "command": "editor.action.marker.next"
+        },
+        {
+          "key": "p",
+          "name": "Previous problem",
+          "type": "command",
+          "command": "editor.action.marker.prev"
+        },
+        {
+          "key": "f",
+          "name": "Quick fix",
+          "type": "command",
+          "command": "editor.action.quickFix"
+        }
+      ]
+    },
+
+    // ----------------------------------------
+    // Version control submenu (v)
+    // ----------------------------------------
+    {
+      "key": "v",
+      "name": "+Version control",
+      "type": "bindings",
+      "bindings": [
+        {
+          "key": "g",
+          "name": "Open source control",
+          "type": "command",
+          "command": "workbench.view.scm"
+        },
+        {
+          "key": "s",
+          "name": "Stage changes",
+          "type": "command",
+          "command": "git.stage"
+        },
+        {
+          "key": "u",
+          "name": "Unstage changes",
+          "type": "command",
+          "command": "git.unstage"
+        },
+        {
+          "key": "c",
+          "name": "Commit",
+          "type": "command",
+          "command": "git.commit"
+        },
+        {
+          "key": "p",
+          "name": "Push",
+          "type": "command",
+          "command": "git.push"
+        },
+        {
+          "key": "l",
+          "name": "Pull",
+          "type": "command",
+          "command": "git.pull"
+        },
+        {
+          "key": "b",
+          "name": "Switch branch",
+          "type": "command",
+          "command": "git.checkout"
+        },
+        {
+          "key": "d",
+          "name": "Diff",
+          "type": "command",
+          "command": "git.openChange"
+        }
+      ]
+    },
+
+    // ----------------------------------------
+    // Hunk submenu (h) - matches gitsigns
+    // Use ]c and [c for next/prev hunk navigation
+    // ----------------------------------------
+    {
+      "key": "h",
+      "name": "+Hunk (git)",
+      "type": "bindings",
+      "bindings": [
+        {
+          "key": "s",
+          "name": "Stage hunk",
+          "type": "command",
+          "command": "git.stageSelectedRanges"
+        },
+        {
+          "key": "u",
+          "name": "Unstage hunk",
+          "type": "command",
+          "command": "git.unstageSelectedRanges"
+        },
+        {
+          "key": "r",
+          "name": "Revert hunk",
+          "type": "command",
+          "command": "git.revertSelectedRanges"
+        },
+        {
+          "key": "p",
+          "name": "Preview hunk (inline)",
+          "type": "command",
+          "command": "editor.action.dirtydiff.next"
+        },
+        {
+          "key": "P",
+          "name": "Preview hunk (side-by-side)",
+          "type": "command",
+          "command": "git.openChange"
+        },
+        {
+          "key": "]",
+          "name": "Next hunk",
+          "type": "command",
+          "command": "workbench.action.editor.nextChange"
+        },
+        {
+          "key": "[",
+          "name": "Previous hunk",
+          "type": "command",
+          "command": "workbench.action.editor.previousChange"
+        }
+      ]
+    },
+
+    // ----------------------------------------
+    // Splits (matching your Neovim config)
+    // ----------------------------------------
+    {
+      "key": "|",
+      "name": "Split vertical",
+      "type": "command",
+      "command": "workbench.action.splitEditorRight"
+    },
+    {
+      "key": "=",
+      "name": "Split horizontal",
+      "type": "command",
+      "command": "workbench.action.splitEditorDown"
+    },
+
+    // ----------------------------------------
+    // Window submenu (x)
+    // ----------------------------------------
+    {
+      "key": "x",
+      "name": "+Window",
+      "type": "bindings",
+      "bindings": [
+        {
+          "key": "h",
+          "name": "Focus left",
+          "type": "command",
+          "command": "workbench.action.focusLeftGroup"
+        },
+        {
+          "key": "l",
+          "name": "Focus right",
+          "type": "command",
+          "command": "workbench.action.focusRightGroup"
+        },
+        {
+          "key": "j",
+          "name": "Focus below",
+          "type": "command",
+          "command": "workbench.action.focusBelowGroup"
+        },
+        {
+          "key": "k",
+          "name": "Focus above",
+          "type": "command",
+          "command": "workbench.action.focusAboveGroup"
+        },
+        {
+          "key": "c",
+          "name": "Close group",
+          "type": "command",
+          "command": "workbench.action.closeEditorsInGroup"
+        },
+        {
+          "key": "o",
+          "name": "Close other groups",
+          "type": "command",
+          "command": "workbench.action.closeEditorsInOtherGroups"
+        },
+        {
+          "key": "=",
+          "name": "Equal width",
+          "type": "command",
+          "command": "workbench.action.evenEditorWidths"
+        }
+      ]
+    },
+
+    // ----------------------------------------
+    // Toggle submenu (t)
+    // ----------------------------------------
+    {
+      "key": "t",
+      "name": "+Toggle",
+      "type": "bindings",
+      "bindings": [
+        {
+          "key": "t",
+          "name": "Terminal",
+          "type": "command",
+          "command": "workbench.action.terminal.toggleTerminal"
+        },
+        {
+          "key": "s",
+          "name": "Sidebar",
+          "type": "command",
+          "command": "workbench.action.toggleSidebarVisibility"
+        },
+        {
+          "key": "p",
+          "name": "Panel",
+          "type": "command",
+          "command": "workbench.action.togglePanel"
+        },
+        {
+          "key": "z",
+          "name": "Zen mode",
+          "type": "command",
+          "command": "workbench.action.toggleZenMode"
+        },
+        {
+          "key": "w",
+          "name": "Word wrap",
+          "type": "command",
+          "command": "editor.action.toggleWordWrap"
+        },
+        {
+          "key": "m",
+          "name": "Minimap",
+          "type": "command",
+          "command": "editor.action.toggleMinimap"
+        }
+      ]
+    },
+
+    // ----------------------------------------
+    // Open submenu (o)
+    // ----------------------------------------
+    {
+      "key": "o",
+      "name": "+Open",
+      "type": "bindings",
+      "bindings": [
+        {
+          "key": "f",
+          "name": "Open file",
+          "type": "command",
+          "command": "workbench.action.files.openFile"
+        },
+        {
+          "key": "r",
+          "name": "Open recent",
+          "type": "command",
+          "command": "workbench.action.openRecent"
+        },
+        {
+          "key": "n",
+          "name": "New file",
+          "type": "command",
+          "command": "workbench.action.files.newUntitledFile"
+        },
+        {
+          "key": "s",
+          "name": "Settings",
+          "type": "command",
+          "command": "workbench.action.openSettings"
+        },
+        {
+          "key": "k",
+          "name": "Keyboard shortcuts",
+          "type": "command",
+          "command": "workbench.action.openGlobalKeybindings"
+        }
+      ]
+    },
+
+    // ----------------------------------------
+    // Navigation reference (n) - shows available ][ commands
+    // These are typed directly, not through which-key
+    // ----------------------------------------
+    {
+      "key": "n",
+      "name": "+Navigation (][)",
+      "type": "bindings",
+      "bindings": [
+        {
+          "key": "c",
+          "name": "]c [c - Git changes",
+          "type": "command",
+          "command": "workbench.action.editor.nextChange"
+        },
+        {
+          "key": "d",
+          "name": "]d [d - Diagnostics",
+          "type": "command",
+          "command": "editor.action.marker.next"
+        },
+        {
+          "key": "r",
+          "name": "]r [r - References",
+          "type": "command",
+          "command": "editor.action.wordHighlight.next"
+        },
+        {
+          "key": "z",
+          "name": "]z [z - Folds",
+          "type": "command",
+          "command": "editor.gotoNextFold"
+        }
+      ]
+    }
+  ]
+}
