@@ -164,6 +164,15 @@ export PNPM_HOME="/Users/graham/Library/pnpm"
 [ -s "/Users/graham/.bun/_bun" ] && source "/Users/graham/.bun/_bun"
 
 # ------------------------------
+# Auto-refresh prompt, mostly for up to date git info
+# ------------------------------
+TMOUT=10  # refresh every 10 seconds
+
+TRAPALRM() {
+  zle reset-prompt
+}
+
+# ------------------------------
 # Misc
 # ------------------------------
 export SKIP_YARN_COREPACK_CHECK=1
