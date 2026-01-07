@@ -51,3 +51,7 @@ vim.opt.scrolloff = 10
 -- Set terminal title to show filename (bubbles up through tmux to Ghostty tab)
 vim.opt.title = true
 vim.opt.titlestring = "%t%( %m%)" -- filename (and [+] if modified)
+
+-- Handle backspace
+vim.opt.backspace = "indent,eol,start"
+vim.opt.swapfile = false
