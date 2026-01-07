@@ -51,10 +51,13 @@
 # theme = Carbonfox
 # theme = Catppuccin Mocha
 # theme = Cobalt Next Dark
-theme = Firewatch
+
+# theme = Firewatch
+# background = #000000
+
 # theme = Flexoki Dark
 # theme = Framer
-# theme = Gruvbox Dark
+theme = Gruvbox Dark
 # theme = Matte Black
 # theme = Monokai Classic
 
@@ -66,3 +69,72 @@ clipboard-trim-trailing-spaces = true
 
 # macOS: Treat Option key as Alt for terminal keybindings
 macos-option-as-alt = true
+
+# Shell
+shell-integration = zsh
+clipboard-paste-protection = false
+mouse-hide-while-typing = true
+
+# Appearance
+background-opacity = 0.9
+background-opacity-cells = true
+background-blur = 20
+keybind = shift+enter=text:\n
+
+adjust-underline-position = 6
+adjust-underline-thickness = -1
+
+# font-family = Iosevka Term
+# adjust-cell-width = -1
+# adjust-cell-height = 2
+# font-style = Light Extended
+# font-style-italic = Extended Oblique
+# #font-style-bold = Extrabold Extended
+# font-size = 14
+# 
+# font-feature = +ss14 # JetBrains Mono style
+# # No ligatures, thx
+# font-feature = -calt
+# # Lilex for bold, serifs are nice
+# font-family-bold = Lilex
+# font-style-bold = Medium
+
+# Primary font
+font-family = Berkeley Mono
+font-style = false
+# Fallback font
+font-family = Monaspace Neon NF
+font-style-bold = Bold
+font-feature = +ss02
+font-style-italic = Medium Oblique
+font-size = 13
+window-inherit-font-size = true
+window-height = 33
+window-width = 130
+
+# Basically Ghostty default
+# font-family = JetBrains Mono Regular Regular
+# font-family-italic = JetBrains Mono Italic Italic
+# font-variation = wght=300
+# font-variation-bold = wght=600
+
+# # Failed fonts
+# font-family = Twilio Sans Mono
+# font-family = Space Mono
+# font-family = NKDuy Mono
+# font-style = Light
+# font-style-bold = SemiBold
+# font-family = Ubuntu Mono
+# font-size = 16
+# font-family = Fira Code
+# font-family = Cascadia Code NF
+# font-family = Andale Mono
+# font-family = Lilex
+# font-family = Cascadia Code NF Regular ExtraLight
+# font-family-italic = Cascadia Code NF Italic Italic
+# font-family = Monaspace Neon NF
+# font-style = ExtraLight
+# #font-family-bold = Monaspace Krypton NF
+# font-style-bold = SemiBold
+# font-family-italic = Monaspace Argon NF
+# font-style-italic = Light Italic
