@@ -15,11 +15,28 @@ export ZSH="/Users/graham/.oh-my-zsh"
 zstyle ':omz:update' mode reminder
 zstyle ':omz:update' frequency 13
 
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions last-working-dir vi-mode zsh-interactive-cd)
+plugins=(
+  git
+  zsh-syntax-highlighting
+  zsh-autosuggestions
+  last-working-dir
+  vi-mode
+  zsh-interactive-cd
+  brew
+  tmuxinator
+  colored-man-pages
+  extract
+  history-substring-search
+)
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=7"
 
 source $ZSH/oh-my-zsh.sh
+
+# Reinitialize completions after plugins have modified fpath
+# This is necessary because some plugins (like brew) add to fpath after OMZ runs compinit
+autoload -Uz compinit
+compinit
 
 # ------------------------------
 # Starship prompt

@@ -1,3 +1,5 @@
+# NOTE: This function is replaced by Oh My Zsh's extract plugin in .zshrc
+# This file is kept for bash compatibility only
 extract () {
 	if [ -f $1 ] ; then
 		case $1 in
