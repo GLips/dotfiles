@@ -20,8 +20,9 @@ require('nvim-treesitter.configs').setup {
 	-- Auto-install missing parsers when entering buffer
 	auto_install = true,
 
+	-- Disable highlighting in VSCode (VSCode handles syntax highlighting)
 	highlight = {
-		enable = true,
+		enable = not vim.g.vscode,
 		additional_vim_regex_highlighting = false,
 	},
 
@@ -83,15 +84,17 @@ require('nvim-treesitter.configs').setup {
 	},
 }
 
--- Repeatable move: ; and , repeat any movement
-local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
+-- Repeatable move: ; and , repeat any movement (only in regular Neovim)
+if not vim.g.vscode then
+	local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
 
--- Make ; repeat forward and , repeat backward
-vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
-vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
+	-- Make ; repeat forward and , repeat backward
+	vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
+	vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
 
--- Make builtin f, F, t, T also repeatable with ; and ,
-vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = true })
-vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
-vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
-vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
+	-- Make builtin f, F, t, T also repeatable with ; and ,
+	vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = true })
+	vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
+	vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
+	vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
+end

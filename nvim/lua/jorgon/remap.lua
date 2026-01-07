@@ -9,8 +9,10 @@ vim.keymap.set({"n", "v"}, "y", '"+y', { desc = "Yank to system clipboard" })
 vim.keymap.set("n", "Y", '"+y$', { desc = "Yank to end of line (system clipboard)" })
 vim.keymap.set("n", "yy", '"+yy', { desc = "Yank whole line (system clipboard)" })
 
--- Test that leader works
-vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save file" })
+-- Save file (in regular Neovim only - VSCode version in init.lua)
+if not vim.g.vscode then
+  vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save file" })
+end
 
 -- Toggle line numbers
 vim.keymap.set("n", "<C-S-n>", ":set number!<CR>", { desc = "Toggle line numbers", silent = true })

@@ -55,3 +55,4 @@ vim.opt.titlestring = "%t%( %m%)" -- filename (and [+] if modified)
 -- Handle backspace
 vim.opt.backspace = "indent,eol,start"
 vim.opt.swapfile = false
+vim.opt.wrap = false

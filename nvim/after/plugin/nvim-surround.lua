@@ -32,7 +32,8 @@ require('nvim-surround').setup({
 local wk_ok, wk = pcall(require, 'which-key')
 if wk_ok then
   wk.add({
-    { "<leader>s", group = "surround", mode = { "n", "v" } },
+    -- TODO: not sure how to use leader s, specifying a selection after s doesn't work in normal or visual mode
+    { "<leader>s",  group = "surround",       mode = { "n", "v" } },
     { "<leader>sd", desc = "Delete surround", mode = { "n", "v" } },
     { "<leader>sc", desc = "Change surround", mode = { "n", "v" } },
   })
