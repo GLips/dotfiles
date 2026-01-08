@@ -24,6 +24,8 @@ require('flash').setup({
   label = {
     -- Allow uppercase labels
     uppercase = true,
+    -- Exclude space from labels
+    exclude = " ",
     -- Add a label for the first match
     rainbow = {
       enabled = false,
@@ -54,6 +56,7 @@ require('flash').setup({
       end,
       jump = { autojump = true },  -- auto-jump when only one match
       highlight = { backdrop = true },
+      label = { exclude = "bewviadc " },  -- exclude common keys + space
     },
     -- Options for search - DISABLED so Flash doesn't hijack / search
     search = {
@@ -63,6 +66,7 @@ require('flash').setup({
     treesitter = {
       labels = "abcdefghijklmnopqrstuvwxyz",
       jump = { pos = "range" },
+      label = { exclude = " " },
       highlight = {
         backdrop = false,
         matches = false,
