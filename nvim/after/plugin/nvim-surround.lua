@@ -48,7 +48,8 @@ vim.keymap.set({ 'n', 'x' }, '<leader>sd', function()
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 'nx', false)
   end
   -- Feed the delete surround command - nvim-surround will wait for the character
-  vim.api.nvim_feedkeys('ds', 'm', false)
+  -- Use 't' mode for better VSCode-Neovim compatibility
+  vim.api.nvim_feedkeys('ds', 't', false)
 end, { desc = 'Delete surround' })
 
 -- <leader>sc - Change surrounding (then type old char, then new char)
@@ -60,5 +61,6 @@ vim.keymap.set({ 'n', 'x' }, '<leader>sc', function()
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 'nx', false)
   end
   -- Feed the change surround command - nvim-surround will wait for old and new characters
-  vim.api.nvim_feedkeys('cs', 'm', false)
+  -- Use 't' mode for better VSCode-Neovim compatibility
+  vim.api.nvim_feedkeys('cs', 't', false)
 end, { desc = 'Change surround' })

@@ -84,17 +84,10 @@ require('nvim-treesitter.configs').setup {
 	},
 }
 
--- Repeatable move: ; and , repeat any movement (only in regular Neovim)
+-- Repeatable motions with ; and , (only in regular Neovim)
+-- Flash uses clever-f style (f repeats f), so ; and , are free for treesitter
 if not vim.g.vscode then
 	local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
-
-	-- Make ; repeat forward and , repeat backward
 	vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
 	vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
-
-	-- Make builtin f, F, t, T also repeatable with ; and ,
-	vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = true })
-	vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
-	vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
-	vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
 end

@@ -194,30 +194,32 @@
     },
 
     // ----------------------------------------
-    // Search/Find submenu (s)
+    // Surround submenu (s) - matches Neovim nvim-surround
     // ----------------------------------------
     {
       "key": "s",
-      "name": "+Search",
+      "name": "+Surround",
       "type": "bindings",
       "bindings": [
         {
-          "key": "f",
-          "name": "Find in files",
+          "key": "c",
+          "name": "Change surround",
           "type": "command",
-          "command": "workbench.action.findInFiles"
+          "command": "vscode-neovim.send",
+          "args": "cs"
         },
         {
-          "key": "s",
-          "name": "Go to symbol (workspace)",
+          "key": "d",
+          "name": "Delete surround",
           "type": "command",
-          "command": "workbench.action.showAllSymbols"
+          "command": "vscode-neovim.send",
+          "args": "ds"
         },
         {
-          "key": "r",
-          "name": "Replace in files",
+          "key": "t",
+          "name": "Search TODOs",
           "type": "command",
-          "command": "workbench.action.replaceInFiles"
+          "command": "todo-tree.showFlatView"
         }
       ]
     },

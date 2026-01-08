@@ -39,13 +39,21 @@ require('flash').setup({
 
   -- Modes configuration
   modes = {
-    -- Options for character search
+    -- Enhanced f/F/t/T with jump labels
+    -- Clever-f style: repeat f with f, F goes backward (frees ; for treesitter)
     char = {
       enabled = true,
-      -- Show jump labels
       jump_labels = true,
-      -- Multi-line character search
       multi_line = true,
+      keys = { "f", "F", "t", "T" },  -- no ; and , (let treesitter have them)
+      char_actions = function(motion)
+        return {
+          [motion:lower()] = "next",
+          [motion:upper()] = "prev",
+        }
+      end,
+      jump = { autojump = true },  -- auto-jump when only one match
+      highlight = { backdrop = true },
     },
     -- Options for search - DISABLED so Flash doesn't hijack / search
     search = {
@@ -64,16 +72,18 @@ require('flash').setup({
 })
 
 -- Keymaps
-vim.keymap.set({ 'n', 'x', 'o' }, 'gs', function() require('flash').jump() end, { desc = 'Flash jump search' })
-vim.keymap.set({ 'n', 'x', 'o' }, 'gS', function() 
-  require('flash').treesitter({
-    -- Add keybindings to expand/contract while in treesitter mode
-    actions = {
-      [';'] = 'next',  -- expand to parent
-      [','] = 'prev',  -- contract to child
-    }
+vim.keymap.set({ 'n', 'x', 'o' }, 'gs', function()
+  require('flash').jump({
+    jump = {
+      register = true,  -- add to search register (for n/N)
+      history = true,   -- add to search history
+    },
   })
-end, { desc = 'Flash treesitter (use ; to expand, , to contract)' })
+end, { desc = 'Flash jump search (n/N to repeat)' })
+
+vim.keymap.set({ 'n', 'x', 'o' }, 'gS', function()
+  require('flash').treesitter()
+end, { desc = 'Flash treesitter select' })
 vim.keymap.set('o', 'r', function() require('flash').remote() end, { desc = 'Flash remote operation' })
 vim.keymap.set({ 'o', 'x' }, 'R', function() require('flash').treesitter_search() end,
   { desc = 'Flash treesitter search (visual)' })
