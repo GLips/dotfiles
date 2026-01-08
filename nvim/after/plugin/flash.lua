@@ -24,8 +24,7 @@ require('flash').setup({
   label = {
     -- Allow uppercase labels
     uppercase = true,
-    -- Exclude space from labels
-    exclude = " ",
+    exclude = "bewviadcy ",
     -- Add a label for the first match
     rainbow = {
       enabled = false,
@@ -47,16 +46,16 @@ require('flash').setup({
       enabled = true,
       jump_labels = true,
       multi_line = true,
-      keys = { "f", "F", "t", "T" },  -- no ; and , (let treesitter have them)
+      keys = { "f", "F", "t", "T" }, -- no ; and , (let treesitter have them)
       char_actions = function(motion)
         return {
           [motion:lower()] = "next",
           [motion:upper()] = "prev",
         }
       end,
-      jump = { autojump = true },  -- auto-jump when only one match
+      jump = { autojump = true }, -- auto-jump when only one match
       highlight = { backdrop = true },
-      label = { exclude = "bewviadc " },  -- exclude common keys + space
+      label = { exclude = "bewviadcy " },
     },
     -- Options for search - DISABLED so Flash doesn't hijack / search
     search = {
@@ -66,7 +65,7 @@ require('flash').setup({
     treesitter = {
       labels = "abcdefghijklmnopqrstuvwxyz",
       jump = { pos = "range" },
-      label = { exclude = " " },
+      label = { exclude = "bewviadcy " },
       highlight = {
         backdrop = false,
         matches = false,
@@ -79,8 +78,8 @@ require('flash').setup({
 vim.keymap.set({ 'n', 'x', 'o' }, 'gs', function()
   require('flash').jump({
     jump = {
-      register = true,  -- add to search register (for n/N)
-      history = true,   -- add to search history
+      register = true, -- add to search register (for n/N)
+      history = true,  -- add to search history
     },
   })
 end, { desc = 'Flash jump search (n/N to repeat)' })
