@@ -207,9 +207,7 @@ use {
 -- Flash - Fast and modern motion plugin
 use {
   'folke/flash.nvim',
-  config = function()
-    require('flash').setup()
-  end
+  -- Config is in after/plugin/flash.lua
 }
 
 -- Obsidian - Obsidian vault integration

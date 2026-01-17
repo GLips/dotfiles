@@ -43,7 +43,7 @@ require('flash').setup({
     -- Enhanced f/F/t/T with jump labels
     -- Clever-f style: repeat f with f, F goes backward (frees ; for treesitter)
     char = {
-      enabled = true,
+      enabled = false,
       jump_labels = true,
       multi_line = true,
       keys = { "f", "F", "t", "T" }, -- no ; and , (let treesitter have them)
