@@ -63,6 +63,7 @@ vim.keymap.set('n', '<leader>ps', function()
 	builtin.grep_string({ search = vim.fn.input("Grep > ") });
 end, { desc = 'Telescope grep' })
 vim.keymap.set('n', '<leader>pg', builtin.live_grep, { desc = 'Telescope live grep' })
+vim.keymap.set('n', '<D-F>', builtin.live_grep, { desc = 'Telescope live grep (Cmd+Shift+F)' })
 
 vim.keymap.set('n', '<leader>tt', function()
   builtin.buffers({

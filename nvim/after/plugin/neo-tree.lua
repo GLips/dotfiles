@@ -72,6 +72,22 @@ require("neo-tree").setup({
 -- Ctrl+N to toggle Neo-tree
 vim.keymap.set("n", "<C-n>", ":Neotree toggle<CR>", { silent = true })
 
+-- Close neo-tree before quitting so tab closes properly
+vim.api.nvim_create_autocmd("QuitPre", {
+  callback = function()
+    local wins = vim.api.nvim_tabpage_list_wins(0)
+    if #wins > 1 then
+      for _, win in ipairs(wins) do
+        local buf = vim.api.nvim_win_get_buf(win)
+        if vim.bo[buf].filetype == 'neo-tree' then
+          vim.api.nvim_win_close(win, false)
+          return
+        end
+      end
+    end
+  end,
+})
+
 -- Open Neo-tree by default when starting Neovim
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
