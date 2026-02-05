@@ -34,7 +34,21 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # Skip OMZ's compinit, we handle it ourselves with caching
 skip_global_compinit=1
+VI_MODE_DISABLE_CLIPBOARD=true
 source $ZSH/oh-my-zsh.sh
+
+# Vi mode clipboard: only explicit yank syncs to system clipboard, not delete/change
+function _vi-yank-clipboard() {
+  zle .${WIDGET}
+  printf %s "${CUTBUFFER}" | clipcopy 2>/dev/null || true
+}
+function _vi-paste-clipboard() {
+  CUTBUFFER="$(clippaste 2>/dev/null || echo $CUTBUFFER)"
+  zle .${WIDGET}
+}
+for _w in vi-yank vi-yank-eol vi-yank-whole-line; do zle -N $_w _vi-yank-clipboard; done
+for _w in vi-put-before vi-put-after put-replace-selection; do zle -N $_w _vi-paste-clipboard; done
+unset _w
 
 # Completions - regenerate cache once per day, otherwise use cache
 autoload -Uz compinit
