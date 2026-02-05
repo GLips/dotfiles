@@ -26,10 +26,7 @@
   "experimental": {
     "disable_paste_summary": true
   },
-  "plugin": [
-    "opencode-antigravity-auth@1.2.8",
-    "opencode-openai-codex-auth"
-  ],
+  "plugin": ["opencode-antigravity-auth@latest", "opencode-openai-codex-auth"],
   "provider": {
     "google": {
       "models": {
@@ -130,9 +127,7 @@
         "reasoningEffort": "medium",
         "reasoningSummary": "auto",
         "textVerbosity": "medium",
-        "include": [
-          "reasoning.encrypted_content"
-        ],
+        "include": ["reasoning.encrypted_content"],
         "store": false
       },
       "models": {
@@ -143,13 +138,8 @@
             "output": 128000
           },
           "modalities": {
-            "input": [
-              "text",
-              "image"
-            ],
-            "output": [
-              "text"
-            ]
+            "input": ["text", "image"],
+            "output": ["text"]
           },
           "variants": {
             "none": {
@@ -186,13 +176,8 @@
             "output": 128000
           },
           "modalities": {
-            "input": [
-              "text",
-              "image"
-            ],
-            "output": [
-              "text"
-            ]
+            "input": ["text", "image"],
+            "output": ["text"]
           },
           "variants": {
             "low": {
@@ -224,13 +209,8 @@
             "output": 128000
           },
           "modalities": {
-            "input": [
-              "text",
-              "image"
-            ],
-            "output": [
-              "text"
-            ]
+            "input": ["text", "image"],
+            "output": ["text"]
           },
           "variants": {
             "low": {
@@ -262,13 +242,8 @@
             "output": 128000
           },
           "modalities": {
-            "input": [
-              "text",
-              "image"
-            ],
-            "output": [
-              "text"
-            ]
+            "input": ["text", "image"],
+            "output": ["text"]
           },
           "variants": {
             "low": {
@@ -295,13 +270,8 @@
             "output": 128000
           },
           "modalities": {
-            "input": [
-              "text",
-              "image"
-            ],
-            "output": [
-              "text"
-            ]
+            "input": ["text", "image"],
+            "output": ["text"]
           },
           "variants": {
             "medium": {
@@ -323,13 +293,8 @@
             "output": 128000
           },
           "modalities": {
-            "input": [
-              "text",
-              "image"
-            ],
-            "output": [
-              "text"
-            ]
+            "input": ["text", "image"],
+            "output": ["text"]
           },
           "variants": {
             "none": {

@@ -80,6 +80,7 @@ background-opacity = 0.9
 background-opacity-cells = true
 background-blur = 20
 keybind = shift+enter=text:\n
+keybind = cmd+shift+f=unbind
 
 adjust-underline-position = 6
 adjust-underline-thickness = -1

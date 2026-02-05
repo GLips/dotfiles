@@ -30,13 +30,24 @@ plugins=(
 )
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=7"
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
+# Skip OMZ's compinit, we handle it ourselves with caching
+skip_global_compinit=1
 source $ZSH/oh-my-zsh.sh
 
-# Reinitialize completions after plugins have modified fpath
-# This is necessary because some plugins (like brew) add to fpath after OMZ runs compinit
+# Completions - regenerate cache once per day, otherwise use cache
 autoload -Uz compinit
-compinit
+if [[ -f ~/.zcompdump && $(find ~/.zcompdump -mtime -1 2>/dev/null) ]]; then
+  compinit -C
+else
+  compinit
+fi
+
+# ------------------------------
+# zoxide (smarter cd) - must be after compinit
+# ------------------------------
+eval "$(zoxide init zsh)"
 
 # ------------------------------
 # Starship prompt
@@ -114,7 +125,6 @@ alias oldvim="/usr/bin/vim"
 alias vim="nvim"
 
 # Claude
-alias claude="/Users/graham/.claude/local/claude"
 
 # ------------------------------
 # Functions
@@ -122,10 +132,6 @@ alias claude="/Users/graham/.claude/local/claude"
 # Quick backup of files
 bak() { cp "$1" "$1.bak"; }
 
-# ------------------------------
-# zoxide (smarter cd)
-# ------------------------------
-eval "$(zoxide init zsh)"
 
 # ------------------------------
 # nvm (lazy loaded for faster startup)
@@ -169,7 +175,10 @@ export PNPM_HOME="/Users/graham/Library/pnpm"
 TMOUT=10  # refresh every 10 seconds
 
 TRAPALRM() {
-  zle reset-prompt
+  # Only refresh if buffer is empty (not typing/in fzf/etc)
+  if [[ -z "$BUFFER" ]]; then
+    zle reset-prompt
+  fi
 }
 
 # ------------------------------
@@ -178,10 +187,11 @@ TRAPALRM() {
 export SKIP_YARN_COREPACK_CHECK=1
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/graham/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/graham/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f "$HOME/.google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/.google-cloud-sdk/path.zsh.inc"; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/graham/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/graham/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f "$HOME/.google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/.google-cloud-sdk/completion.zsh.inc"; fi
 
 # Added by Antigravity
 export PATH="/Users/graham/.antigravity/antigravity/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
